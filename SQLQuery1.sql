@@ -1,0 +1,1 @@
+﻿SELECT * FROM Games WHERE Games.id IN (SELECT GamersId FROM Users WHERE Users.id = @id )
