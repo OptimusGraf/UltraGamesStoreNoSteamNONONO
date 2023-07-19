@@ -95,6 +95,18 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             return list;
         }
+        public HashSet<IGame> GetUsersCreatedGames()
+        {
+            Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("name", userName) };
+            DataTable table = sqlBase.DataQuery("SELECT * FROM Games WHERE Games.author = @userName )", parametrs).Tables[0];
+            HashSet<IGame> list = new HashSet<IGame>();
+            foreach (DataRow item in table.Rows)
+            {
+                Game game = new Game(item, sqlBase);
+                list.Add(game);
+            }
+            return list;
+        }
 
         SQLBase sqlBase;
         public SQLBase SQLBase { get => SQLBase; set => SQLBase = value; }
@@ -129,9 +141,9 @@ namespace UltraGamesStoreNoSteamNONONO
                 image = value;
             }
         }
-        private int money;
+        private decimal money;
 
-        public int Money
+        public decimal Money
         {
             get { return money; }
 
@@ -209,7 +221,12 @@ namespace UltraGamesStoreNoSteamNONONO
                 ListOfGames.Add(userGame);
             }
 
-
+        }
+        public void UpdateInfo()
+        {
+            this.basket = LoadBasket();
+            this.wantedGames = LoadWanted();
+            this.listOfGames = LoadList();
         }
     }
 }

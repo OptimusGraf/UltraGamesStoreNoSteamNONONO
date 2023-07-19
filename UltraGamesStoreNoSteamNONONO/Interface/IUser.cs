@@ -21,6 +21,8 @@ namespace UltraGamesStoreNoSteamNONONO
         public void DeleteGameFromwanted(IGame game);
         public HashSet<IUserGames> ListOfGames { get; }
         public void AddGameToList(IGame game);
-        public int Money { get; set; }
+        public decimal Money { get; set; }
+        public HashSet<IGame> GetUsersCreatedGames();
+        public void UpdateInfo();
     }
 }

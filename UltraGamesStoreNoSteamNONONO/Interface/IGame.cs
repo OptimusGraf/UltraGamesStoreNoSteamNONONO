@@ -16,7 +16,7 @@
 
         public int GetHashCode();
         public decimal Money { get; set; }
-
         public int RecAge { get; set; }
+
     }
 }

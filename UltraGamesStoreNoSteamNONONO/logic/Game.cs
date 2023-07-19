@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,7 @@ namespace UltraGamesStoreNoSteamNONONO
             //картинки потом
             //сюда тоже исключения
             //дата
+            // а если есть игра с таким названием
             Tuple<string, object>[] parametrs = {
                 new Tuple<string, object> ("name",nameOfGame),
                 new Tuple<string, object>("price", money),
@@ -159,5 +161,23 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             return this.id.GetHashCode();
         }
+
+        static public List<IGame> GetTenGames(int cursor,SQLBase sqlBase)
+        {
+            string query = "SELECT * FROM Games ORDER BY ID OFFSET @cursor ROWS NEXT 10 ROWS ONLY";
+            Tuple<string, object>[] parameters = { new Tuple<string, object>("cursor", cursor) };
+            DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
+
+            List<IGame> list = new List<IGame>();
+            foreach (DataRow row in table.Rows) 
+            {
+                list.Add(new Game(row, sqlBase));
+            }
+            return list;
+
+        }
+
+     
+  
     }
 }
