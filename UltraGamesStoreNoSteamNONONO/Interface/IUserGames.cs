@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal interface IUserGames
+    internal interface IUserGames:IGame
     {
   
         public int Id { get; }
-
-
-        public Game Game { get; set; }
 
         public bool IsLoaded { get; set; }
 
@@ -20,8 +17,6 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public int CountOfHour { get; set; }
 
-        public bool Equals(object? obj);
 
-        public int GetHashCode();
     }
 }

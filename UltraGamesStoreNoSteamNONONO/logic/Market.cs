@@ -8,8 +8,8 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UltraGamesStoreNoSteamNONONO.logic
-{// асинки добавить
+namespace UltraGamesStoreNoSteamNONONO
+{// асинки добавить, изменение инфомрации об акке и играх
     internal class Market : IMarket
     {
         SQLBase sqlBase;
@@ -24,13 +24,14 @@ namespace UltraGamesStoreNoSteamNONONO.logic
 
         public void AddToBasketList(IGame game)
         {
-            CurrentUser.AddGameToBasket(game);
+                                                                                                                                                                                       
+            CurrentUser.Basket.AddGame(game);
             ChangedUI?.Invoke();
         }
 
         public void AddToWantedList(IGame game)
         {
-            CurrentUser.AddGameToWanted(game);
+            CurrentUser.WantedGames.AddGame(game);
             ChangedUI?.Invoke();
         }
 
@@ -38,24 +39,24 @@ namespace UltraGamesStoreNoSteamNONONO.logic
         {
 
             decimal sum = 0;
-            foreach (var item in CurrentUser.Basket)
+            int recAge = 0;
+            foreach (var item in CurrentUser.Basket.Games)
             {
                 sum += item.Money;
+                recAge = Math.Max(recAge, item.RecAge);
             }
 
-            if (CurrentUser.Money >= sum)
+            if (CurrentUser.Money >= sum && CurrentUser.Age>= recAge)
             {
                 CurrentUser.Money -= sum;
-                foreach (var item in CurrentUser.Basket)
+                foreach (var item in CurrentUser.Basket.Games)
                 {
-                    CurrentUser.AddGameToList(item);
-                    CurrentUser.DeleteGameFromwanted(item);
-                    CurrentUser.DeleteGameFromBasket(item);
+                    //ИСКЛЮЧЕНИЯ
+                    CurrentUser.AvailableGames.AddGame(item);
+                    currentUser.Basket.DeleteGame(item);
+                    currentUser.WantedGames.DeleteGame(item);
                 }
-
-
             }
-
 
             ChangedUI?.Invoke();
         }
@@ -63,75 +64,46 @@ namespace UltraGamesStoreNoSteamNONONO.logic
         public void CreateGame(string nameOfGame, int money, int rate, int recAge, DateOnly date, int powerOfPc, string author, SQLBase sqlBase)
         {
             Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, sqlBase);
-
-
-
             ChangedUI?.Invoke();
         }
 
-        public List<IGame> GetBasketList()
+        public HashSet<IGame> GetBasketList()
         {
-            return CurrentUser.Basket.ToList();
+            return CurrentUser.Basket.Games;
+        }
+      
+        public List<IGame> TopTenGamesFrom(int cursor = 0)
+        {
+        return Game.GetTenGames(cursor, sqlBase);
+        }
+   
+        public HashSet<IGame> GetUsersListOfGames()
+        {
+            return CurrentUser.AvailableGames.Games;
         }
 
-        List<IGame> listOfGames;
-        public List<IGame> ListOfGames { get { return listOfGames; } }
-        int cursor = 0;
-        public void NextTopTenGames()
+        public HashSet<IGame> GetWantedList()
         {
-            listOfGames = Game.GetTenGames(cursor, sqlBase);
-            cursor += 10;
-        }
-        private void UpdateListOFGames()
-        {
-            listOfGames = Game.GetTenGames(cursor, sqlBase);
-        }
-        private void UpdateInfo()
-        {
-            UpdateListOFGames();
-            CurrentUser.UpdateInfo();
-        }
-
-        public List<IUserGames> GetUsersListOfGames()
-        {
-            return CurrentUser.ListOfGames.ToList();
-        }
-
-        public List<IGame> GetWantedList()
-        {
-            return CurrentUser.WantedGames.ToList();
+            return CurrentUser.WantedGames.Games;
         }
 
         public void RemoveFromBasketList(IGame game)
         {
-            CurrentUser.DeleteGameFromBasket(game);
-
+            CurrentUser.Basket.DeleteGame(game);
 
             ChangedUI?.Invoke();
         }
 
         public void RemoveFromWantedList(IGame game)
         {
-            CurrentUser.DeleteGameFromwanted(game);
+            CurrentUser.WantedGames.DeleteGame(game);
             ChangedUI?.Invoke();
 
         }
 
         public void SignIn(string name, string pasword)
         {
-            /// сюда исключение добавить
-            string query = "SELECT * FROM Users WHERE username=@name and pasword= @pasword";
-
-            Tuple<string, object>[] parametres = { new Tuple<string, object>("name", name), new Tuple<string, object>("pasword", pasword) };
-
-            DataTable table = sqlBase.DataQuery(query, parametres).Tables[0];
-            if (table.Rows.Count == 0)
-            {
-                throw new NotImplementedException();
-            }
-
-            currentUser = new User(table.Rows[0], sqlBase);
-
+            currentUser = User.SingIn(name, pasword, sqlBase);
 
             ChangedUI?.Invoke();
 

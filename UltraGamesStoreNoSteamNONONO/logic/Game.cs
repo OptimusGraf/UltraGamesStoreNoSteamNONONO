@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     internal class Game : IGame
     {
+       static User user;
+        static public User User { get=>user; set=>user=value; }
         //реализовать метод newgame
         public Game(DataRow row, SQLBase sqlBase) : this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003,7,12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], null, (decimal)row["price"], null, sqlBase)
         {
@@ -35,14 +30,12 @@ namespace UltraGamesStoreNoSteamNONONO
             sqlBase.NoResultQuery("INSERT Games VALUES(@name, @price,@rate,@recAge,@date,@author,@powerOfPC, null,null)", parametrs);
             int id = (int)(sqlBase.DataQuery("SELECT id FROM Games WHERE nameOfGame = @name", parametrs).Tables[0].Rows[0]["id"]);
             Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, null, money, null, sqlBase);
-       
-
             return game;
         }
         private Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge,Image icon, decimal money, Image imageOfGame, SQLBase sqlBase)
         {
             this.name = name;
-            this.id = id;
+            this.gameId = id;
             this.author = author;
            this.date = date;
             this.powerOfPc = powerOfPc;
@@ -54,113 +47,41 @@ namespace UltraGamesStoreNoSteamNONONO
             this.sqlBase = sqlBase;
         }
 
+        readonly int gameId;
+        public int GameId => gameId;
+
         public string name;
-        readonly int id;
-        public int Id => id;
-        public string Name
-        {
-            get { return name; }
-            set
-            {
-                string query = "UPDATE Games SET name=@newname WHERE id=@id";
-                Tuple<string, object>[] parameters
-                      = { new Tuple<string, object>("newname", value), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery(query, parameters);
-                name = value;
-            }
-        }
+        public string Name { get => name; set { name = value; UpdateInfoAboutGames(); } }
+
         string author;
         public string Author { get => author; }
+
         DateOnly date;
         public DateOnly Release { get => date; }
-        int powerOfPc;
-        public int PowerOfPc { get => powerOfPc; }
-        int rate;
-        public int Rate
-        {
-            get { return rate; }
-            set
-            {
-                string query = "UPDATE Games SET rate=@newrate WHERE id=@id";
-                Tuple<string, object>[] parameters
-                      = { new Tuple<string, object>("newrate", value), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery(query, parameters);
-                rate = value;
-            }
-        }
-        private int recAge;
 
-        public int RecAge
-        {
-            get { return recAge; }
-            set
-            {
-                string query = "UPDATE Games SET recAge=@newrec WHERE id=@id";
-                Tuple<string, object>[] parameters
-                      = { new Tuple<string, object>("newrec", value), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery(query, parameters);
-                recAge = value;
-            }
-        }
+        int powerOfPc;
+        public int PowerOfPc { get => powerOfPc; set { powerOfPc = value; UpdateInfoAboutGames(); } }
+
+        int rate;
+        public int Rate { get => rate; set { rate = value; UpdateInfoAboutGames(); } }
+
+        private int recAge;
+        public int RecAge { get => recAge; set { recAge = value; UpdateInfoAboutGames(); } }
 
         Image icon;
-        public Image Icon
-        {
-            get { return icon; }
-            set
-            {
-                byte[] newIcon = (value as Image).FromImageToByteArray();
-                string query = "UPDATE Games SET icon=@newicone WHERE  WHERE id=@id";
-                Tuple<string, object>[] parameters
-                      = { new Tuple<string, object>("newicone", newIcon), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery(query, parameters);
-                icon = value;
-            }
+        public Image Icon { get => icon; set { icon = value; UpdateInfoAboutGames(); } }
 
-
-        }
         private decimal money;
-
-        public decimal Money
-        {
-            get { return money; }
-            set
-            {
-                Tuple<string, object>[] parameters
-                  = { new Tuple<string, object>("money", value), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery("UPDATE Games SET price = @money WHERE id=@id", parameters);
-                money = value;
-            }
-        }
+        public decimal Money { get => money; set { money = value; UpdateInfoAboutGames(); } }
 
         Image imageOfGame;
-        public Image ImageOfGame
-        {
-            get { return imageOfGame; }
-            set
-            {
-                byte[] newimageOfGame = (value as Image).FromImageToByteArray();
-                string query = "UPDATE Games SET imageOfGame=@newimageOfGame WHERE WHERE id=@id";
-                Tuple<string, object>[] parameters
-                      = { new Tuple<string, object>("newimageOfGame", newimageOfGame), new Tuple<string, object>("id", id) };
-                sqlBase.NoResultQuery(query, parameters);
-                imageOfGame = value;
-            }
+        public Image ImageOfGame { get => imageOfGame; set { imageOfGame = value; UpdateInfoAboutGames(); } }
 
-        }
         SQLBase sqlBase;
         public SQLBase SQLBase { get => SQLBase; set => SQLBase = value; }
 
-
-        public override bool Equals(object? obj)
-        {
-
-            return ((obj is Game) && ((Game)obj).id == this.id);
-        }
-        public override int GetHashCode()
-        {
-            return this.id.GetHashCode();
-        }
+        public override bool Equals(object? obj) => ((obj is Game) && ((Game)obj).gameId == this.gameId);
+        public override int GetHashCode() =>  this.gameId.GetHashCode();
 
         static public List<IGame> GetTenGames(int cursor,SQLBase sqlBase)
         {
@@ -176,8 +97,23 @@ namespace UltraGamesStoreNoSteamNONONO
             return list;
 
         }
+        protected virtual void UpdateInfoAboutGames()
+        {
+            byte[] newimageOfGame = imageOfGame.FromImageToByteArray();
+            byte[] newIcon = icon.FromImageToByteArray();
+            string query = "UPDATE Games SET nameOfGame=@name, price=@price, recAge=@recAge, powerOfPC= @powerOfPc, icon=@newicon, imageOfGame=@newimageOfGame  WHERE id=@id";
+            Tuple<string, object>[] parameters = {
+                new Tuple<string, object> ("name",name),
+                new Tuple<string, object>("price", money),
+                new Tuple<string, object>("recAge",recAge),
+                new Tuple<string,object> ("powerOfPC", powerOfPc),
+                 new Tuple<string, object>("newimageOfGame", newimageOfGame),
+                  new Tuple<string, object>("newicon", newIcon)
+            };
+            sqlBase.NoResultQuery(query, parameters);
 
-     
-  
+            user.UpdateInfoAboutGames();
+        }
+
     }
 }

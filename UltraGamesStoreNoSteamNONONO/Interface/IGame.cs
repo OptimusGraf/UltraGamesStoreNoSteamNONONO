@@ -1,9 +1,12 @@
-﻿namespace UltraGamesStoreNoSteamNONONO
+﻿using Microsoft.VisualBasic.ApplicationServices;
+
+namespace UltraGamesStoreNoSteamNONONO
 {
     internal interface IGame
     {
+        static public User User { get ; set ; }
         public SQLBase SQLBase { get; set; }
-        public int Id { get; }
+        public int GameId { get; }
         public string Name { get; set; }
         public string Author { get; }
         public DateOnly Release { get; }

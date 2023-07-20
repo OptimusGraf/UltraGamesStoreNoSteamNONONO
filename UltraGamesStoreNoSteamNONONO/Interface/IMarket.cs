@@ -14,11 +14,10 @@ namespace UltraGamesStoreNoSteamNONONO
         public void SignOut();
         public void SignUp(string username, int age, string password, int powerOfPc, SQLBase sqlBase);
 
-        public List<IGame> ListOfGames {  get; }
-        public void NextTopTenGames();
-        public List<IGame> GetBasketList();
-        public List<IGame> GetWantedList();
-        public List<IUserGames> GetUsersListOfGames();
+        public List<IGame> TopTenGamesFrom (int cursor);
+        public HashSet<IGame> GetBasketList();
+        public HashSet<IGame> GetWantedList();
+        public HashSet<IGame> GetUsersListOfGames();
         public void AddToBasketList(IGame game);
         public void RemoveFromBasketList(IGame game);
         public void AddToWantedList(IGame game);

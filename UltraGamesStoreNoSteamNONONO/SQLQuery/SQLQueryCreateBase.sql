@@ -35,20 +35,24 @@ CREATE TABLE UsersListOfGames
 	id INT IDENTITY  PRIMARY KEY,
 	UserId INT REFERENCES Users(Id),
 	GamesId INT REFERENCES Games(Id),
-	CountOfHour INT,
-	Progress INT CHECK (Progress>=0 AND Progress<=100),
-	isLoaded BIT 
+	UNIQUE(UserId, GamesId),
+
+	CountOfHour INT DEFAULT(0) ,
+	Progress INT  DEFAULT(0) CHECK (Progress>=0 AND Progress<=100),
+	isLoaded BIT  DEFAULT(0)
 )
 
 CREATE TABLE UsersListOfWanted
 (
 	UserId INT REFERENCES Users(Id),
 	GamesId INT REFERENCES Games(Id),
+	UNIQUE(UserId, GamesId)
 )
 CREATE TABLE UsersListBasket
 (
 	UserId INT REFERENCES Users(Id),
 	GamesId INT REFERENCES Games(Id),
+	UNIQUE(UserId, GamesId)
 )
 GO
 INSERT Users (username,pasword,moneyOfUser,age,PowerOfPC) VALUES
