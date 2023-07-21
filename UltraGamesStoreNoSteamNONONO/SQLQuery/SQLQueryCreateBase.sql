@@ -64,4 +64,6 @@ INSERT Games (nameOfGame,price,rate,recAge,release,author,powerOfPc) VALUES
 ('Civil war',200,100,18,'2026-12-20','Persik',20),
 ('Anekdots',500,90,18,'2027-12-20','Persik',59);
 GO
+INSERT UsersListOfGames VALUES
+(1,1,0,0,0)
 USE master;

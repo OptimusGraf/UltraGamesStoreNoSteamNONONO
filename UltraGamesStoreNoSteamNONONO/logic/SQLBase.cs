@@ -11,8 +11,16 @@ namespace UltraGamesStoreNoSteamNONONO
     internal class SQLBase
     {
 
+
+
         string ConnectionString;
         SqlConnection connection;
+
+        public SQLBase(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
+
         public void OpenConnection()
         {
             connection = new SqlConnection(ConnectionString);

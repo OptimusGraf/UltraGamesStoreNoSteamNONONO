@@ -71,7 +71,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("isLoaded", isLoaded),
                 new Tuple<string, object>("id", id) };
             SQLBase.NoResultQuery(query, parametrs);
-            User.UpdateInfoAboutGames();
+            ChangedMaster();
 
         }
         public override bool Equals(object? obj) => ((obj is UserGame) && ((UserGame)obj).id == this.id);

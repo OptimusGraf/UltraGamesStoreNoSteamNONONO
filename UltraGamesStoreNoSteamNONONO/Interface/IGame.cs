@@ -4,7 +4,7 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     internal interface IGame
     {
-        static public User User { get ; set ; }
+        static public event Action Changed;
         public SQLBase SQLBase { get; set; }
         public int GameId { get; }
         public string Name { get; set; }

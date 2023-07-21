@@ -1,11 +1,11 @@
-﻿using System.Data;
+﻿using System.Configuration;
+using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     internal class Game : IGame
     {
-       static User user;
-        static public User User { get=>user; set=>user=value; }
+
         //реализовать метод newgame
         public Game(DataRow row, SQLBase sqlBase) : this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003,7,12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], null, (decimal)row["price"], null, sqlBase)
         {
@@ -97,6 +97,8 @@ namespace UltraGamesStoreNoSteamNONONO
             return list;
 
         }
+        static public event Action Changed;
+
         protected virtual void UpdateInfoAboutGames()
         {
             byte[] newimageOfGame = imageOfGame.FromImageToByteArray();
@@ -110,9 +112,14 @@ namespace UltraGamesStoreNoSteamNONONO
                  new Tuple<string, object>("newimageOfGame", newimageOfGame),
                   new Tuple<string, object>("newicon", newIcon)
             };
+            
             sqlBase.NoResultQuery(query, parameters);
+            ChangedMaster();
+        }
+        protected void ChangedMaster()
+        {
+            Changed?.Invoke();
 
-            user.UpdateInfoAboutGames();
         }
 
     }
