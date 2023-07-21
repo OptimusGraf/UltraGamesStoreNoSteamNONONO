@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public SQLBase SQLBase { get; set; }
         public void SignIn(string name, string pasword);
         public void SignOut();
-        public void SignUp(string username, int age, string password, int powerOfPc, SQLBase sqlBase);
+        public void SignUp(string username, int age, string password, int powerOfPc);
 
         public List<IGame> TopTenGamesFrom (int cursor);
         public HashSet<IGame> GetBasketList();

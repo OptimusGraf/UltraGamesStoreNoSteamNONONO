@@ -19,6 +19,11 @@ namespace UltraGamesStoreNoSteamNONONO
         public event Action ChangedUI;
         private User currentUser;
 
+        public Market(string connection)
+        {
+            this.sqlBase = new SQLBase(connection);
+        }
+
         public IUser CurrentUser => currentUser;
 
 
@@ -116,10 +121,10 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        public void SignUp(string username, int age, string password, int powerOfPc, SQLBase sqlBase)
+        public void SignUp(string username, int age, string password, int powerOfPc)
         {
             //ИСКЛЮЧЕНИЯ
-            User.NewUser(username, age, password, powerOfPc, sqlBase);
+           currentUser= User.NewUser(username, age, password, powerOfPc, sqlBase);
             
         }
 

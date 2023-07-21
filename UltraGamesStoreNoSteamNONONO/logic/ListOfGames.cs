@@ -14,7 +14,7 @@ namespace UltraGamesStoreNoSteamNONONO
         string nameOfTable;
         public ListOfGames(SQLBase sqlBase, int userId, string nameOfTable)
         {
-            sqlBase = sqlBase;
+            this.sqlBase = sqlBase;
             this.userId = userId;
             this.nameOfTable = nameOfTable;
             LoadData();
@@ -25,7 +25,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public void LoadData()
         {
             Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("id", userId) };
-            string query = $"SELECT * FROM Games WHERE Games.id IN (SELECT GamersId FROM {nameOfTable} WHERE Users.id = @id )";
+            string query = $"SELECT * FROM Games WHERE Games.id IN (SELECT GamesId FROM {nameOfTable} WHERE UserId = @id )";
 
             DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
 
@@ -44,7 +44,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 // ТУТ НАДО ОБРАБОТКУ ИСКЛЮЧЕНИЙ 
                 games.Add(game);
                 Tuple<string, object>[] parametrs = { new Tuple<string, object>("userid", userId), new Tuple<string, object>("gameid", game.GameId) };
-                string query = $"INSERT {nameOfTable} (UserId,GameId) VALUE (@userif, @gameid)";
+                string query = $"INSERT {nameOfTable} (UserId,GameId) VALUE (@userid, @gameid)";
                 sqlBase.NoResultQuery(query, parametrs);
 
             }
@@ -56,7 +56,7 @@ namespace UltraGamesStoreNoSteamNONONO
             {
                 games.Remove(game);
                 Tuple<string, object>[] parametrs = { new Tuple<string, object>("userid", userId), new Tuple<string, object>("gameid", game.GameId) };
-                string query = $"DELETE FROM {nameOfTable} WHERE GamesID = @gameid AND  UserID = @userid";
+                string query = $"DELETE FROM {nameOfTable} WHERE GamesId = @gameid AND  UserId = @userid";
                 sqlBase.NoResultQuery(query, parametrs);
             }
         }

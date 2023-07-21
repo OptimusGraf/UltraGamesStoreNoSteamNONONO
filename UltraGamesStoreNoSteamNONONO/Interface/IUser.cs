@@ -21,7 +21,6 @@ namespace UltraGamesStoreNoSteamNONONO
         public ListOfGames Basket { get; }
         public ListOfGames WantedGames { get; }
         public ListOfGames AvailableGames { get; }
-        public ListOfGames CreatedGames { get; }
-
+        public List<IGame> CreatedGames { get; }
     }
 }

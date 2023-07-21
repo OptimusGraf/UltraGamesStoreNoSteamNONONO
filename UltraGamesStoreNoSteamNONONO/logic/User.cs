@@ -7,6 +7,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Markup;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace UltraGamesStoreNoSteamNONONO
@@ -15,6 +16,10 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (int)row["moneyOfuser"])
         {
+            availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
+            basket = new ListOfGames(sqlBase, id, "UsersListBasket");
+            wantedGames = new ListOfGames(sqlBase, id, "UsersListOfWanted");
+            createdGames = new List<IGame>();
             UpdateInfoAboutGames();
             //ДОБАВИТЬ КАРТИНКИ;
         }
@@ -91,8 +96,23 @@ namespace UltraGamesStoreNoSteamNONONO
         private ListOfGames availableGames;
         public ListOfGames AvailableGames => availableGames;
 
-        private ListOfGames createdGames;
-        public ListOfGames CreatedGames => createdGames;
+        private List<IGame> createdGames;
+        public List<IGame> CreatedGames => createdGames;
+        private void LoadDataCreatedGames()
+        {
+            Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("name", userName) };
+            string query = $"SELECT * FROM Games WHERE author =@name  )";
+
+            DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
+
+            List<IGame> list = new List<IGame>();
+            foreach (DataRow item in table.Rows)
+            {
+                Game game = new Game(item, sqlBase);
+                list.Add(game);
+            }
+            createdGames = list;
+        }
 
         private void UpdateInfoAboutUser()
         {
@@ -113,8 +133,7 @@ namespace UltraGamesStoreNoSteamNONONO
             basket.LoadData();
             wantedGames.LoadData();
             availableGames.LoadData();
-            createdGames.LoadData();
-
+            LoadDataCreatedGames();
         }
     }
 }

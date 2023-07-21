@@ -12,7 +12,7 @@ namespace UltraGamesStoreNoSteamNONONO
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
 
-       static public Game newGame(string nameOfGame, int money, int rate, int recAge,DateOnly date, int powerOfPc, string author,SQLBase sqlBase)
+       static public Game newGame(string nameOfGame, decimal money, int rate, int recAge,DateOnly date, int powerOfPc, string author,SQLBase sqlBase)
         {
             //картинки потом
             //сюда тоже исключения
