@@ -85,7 +85,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         static public List<Game> GetTenGames(int cursor,SQLBase sqlBase)
         {
-            string query = "SELECT * FROM Games ORDER BY ID OFFSET @cursor ROWS NEXT 10 ROWS ONLY";
+            string query = "SELECT * FROM Games ORDER BY Id OFFSET @cursor ROWS FETCH NEXT 10 ROWS ONLY";
             Tuple<string, object>[] parameters = { new Tuple<string, object>("cursor", cursor) };
             DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
 

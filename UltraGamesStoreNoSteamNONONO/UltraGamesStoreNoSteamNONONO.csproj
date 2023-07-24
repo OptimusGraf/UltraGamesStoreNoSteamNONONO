@@ -17,6 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\GameViews\GameViewAuthor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Forms\Panels\GamePanelBassket.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\Panels\GamePanelUsers.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Forms\Panels\GamePanelWanted.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

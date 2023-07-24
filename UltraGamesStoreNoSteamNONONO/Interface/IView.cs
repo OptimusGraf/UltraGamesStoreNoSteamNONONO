@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UltraGamesStoreNoSteamNONONO.Forms
+namespace UltraGamesStoreNoSteamNONONO
 {
     public interface IView
     {
-        IMarket market { get; set; }
+        IMarket Market { get; set; }
         void UpdateView();
 
     }

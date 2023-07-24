@@ -41,12 +41,13 @@
             tabPageMarket = new TabPage();
             tabControl2 = new TabControl();
             tabPageCatalog = new TabPage();
+            splitContainer1 = new SplitContainer();
+            label1 = new Label();
+            marketPanel = new Panel();
             tabPageWanted = new TabPage();
             tabPageBasket = new TabPage();
             tabPageLibary = new TabPage();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            splitContainer1 = new SplitContainer();
-            label1 = new Label();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageMarket.SuspendLayout();
@@ -54,6 +55,7 @@
             tabPageCatalog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             SuspendLayout();
             // 
@@ -163,6 +165,41 @@
             tabPageCatalog.Text = "Каталог";
             tabPageCatalog.UseVisualStyleBackColor = true;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(3, 3);
+            splitContainer1.Name = "splitContainer1";
+            splitContainer1.Orientation = Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(label1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(marketPanel);
+            splitContainer1.Size = new Size(772, 358);
+            splitContainer1.SplitterDistance = 60;
+            splitContainer1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(126, 28);
+            label1.Name = "label1";
+            label1.Size = new Size(123, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Здесь будут фильтры";
+            // 
+            // marketPanel
+            // 
+            marketPanel.Dock = DockStyle.Fill;
+            marketPanel.Location = new Point(0, 0);
+            marketPanel.Name = "marketPanel";
+            marketPanel.Size = new Size(772, 294);
+            marketPanel.TabIndex = 0;
+            // 
             // tabPageWanted
             // 
             tabPageWanted.Location = new Point(4, 24);
@@ -198,29 +235,6 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
-            // splitContainer1
-            // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(3, 3);
-            splitContainer1.Name = "splitContainer1";
-            splitContainer1.Orientation = Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            splitContainer1.Panel1.Controls.Add(label1);
-            splitContainer1.Size = new Size(772, 358);
-            splitContainer1.SplitterDistance = 90;
-            splitContainer1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(126, 28);
-            label1.Name = "label1";
-            label1.Size = new Size(123, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Здесь будут фильтры";
-            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -241,6 +255,7 @@
             tabPageCatalog.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
+            splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
             ResumeLayout(false);
@@ -267,5 +282,6 @@
         private ContextMenuStrip contextMenuStrip1;
         private SplitContainer splitContainer1;
         private Label label1;
+        private Panel marketPanel;
     }
 }

@@ -10,16 +10,19 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
 
-namespace UltraGamesStoreNoSteamNONONO.logic
+namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class GameView : UserControl
     {
-         public GameView(string name, string author, Image icon) : base()
+        protected Button Button1 { get => button1; }
+        protected Button Button2 { get => button2; }
+        public GameView(string name, string author, Image icon)
         {
             InitializeComponent();
             labelName.Text = name;
             labelAuthor.Text = author;
             pictureBox1.Image = icon;
+
         }
     }
 }

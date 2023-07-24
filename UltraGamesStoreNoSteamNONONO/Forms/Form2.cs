@@ -13,7 +13,7 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class Form2 : Form
     {
-        // уведомления, отзовы, исключения, асинхи, фильтрация, даты выхода и изображения 
+        // уведомления; отзовы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения
         IMarket market;
 
 
@@ -21,6 +21,8 @@ namespace UltraGamesStoreNoSteamNONONO
         {
 
             InitializeComponent();
+
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -28,8 +30,10 @@ namespace UltraGamesStoreNoSteamNONONO
             string connection = ConfigurationManager.ConnectionStrings["base"].ConnectionString;
             market = new Market(connection);
             market.SQLBase.OpenConnection();
-            //. SignIn();
-
+            SignIn();
+            GamePanelMarket gameMarketPanel = new GamePanelMarket(market);
+          
+            marketPanel.Controls.Add(gameMarketPanel);
 
         }
 
