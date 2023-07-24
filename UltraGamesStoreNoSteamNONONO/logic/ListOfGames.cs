@@ -6,7 +6,7 @@ using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal class ListOfGames
+    public class ListOfGames
     {
         SQLBase sqlBase;
         private HashSet<IGame> games;

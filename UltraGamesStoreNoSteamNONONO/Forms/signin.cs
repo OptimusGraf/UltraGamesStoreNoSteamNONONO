@@ -29,10 +29,12 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // можно будет добавить возвращение назад
             panel1.Controls.Remove(control);
             control = new SignUpControl(market);
             control.Dock = DockStyle.Fill;
             panel1.Controls.Add(control);
+            linkLabel2.Text = "";
 
         }
     }

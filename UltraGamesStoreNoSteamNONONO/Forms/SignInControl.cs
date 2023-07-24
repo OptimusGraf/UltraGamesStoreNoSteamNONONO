@@ -21,12 +21,11 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            market.SignIn(textBox1.Text, textBox2.Text);
-            ParentForm.DialogResult = DialogResult.OK;
-            ParentForm.Close();
             try
             {
-                
+                market.SignIn(textBox1.Text, textBox2.Text);
+                ParentForm.DialogResult = DialogResult.OK;
+                ParentForm.Close();
             }
             catch (Exception ex)
             {
@@ -36,7 +35,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show("В целях безопасноти, мы не востанавливаем пароль. ВСПОМИНАЙТЕ");
+            MessageBox.Show("В целях безопасноти,мы не восстанавливаем пароль. ВСПОМИНАЙТЕ");
 
         }
     }

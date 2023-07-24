@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-   static internal class Helper
+   static public class Helper
     {
         static public byte[] FromImageToByteArray(this Image image)
         {

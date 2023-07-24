@@ -1,2 +1,3 @@
-﻿USE MyGameStore;
-INSERT UsersListOfWanted VALUES(1,2);
+﻿USE MyGameStore
+DELETE Users WHERE username = 'cowboy';
+SELECT * FROM Users

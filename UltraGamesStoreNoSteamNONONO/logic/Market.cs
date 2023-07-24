@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace UltraGamesStoreNoSteamNONONO
 {// асинки добавить, изменение инфомрации об акке и играх
-    internal class Market : IMarket
+    public class Market : IMarket
     {
         SQLBase sqlBase;
         public SQLBase SQLBase { get { return sqlBase; } set { sqlBase = value; } }

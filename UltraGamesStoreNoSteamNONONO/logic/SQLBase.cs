@@ -8,7 +8,7 @@ using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal class SQLBase
+    public class SQLBase
     {
 
 

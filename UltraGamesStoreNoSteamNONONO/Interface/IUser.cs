@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal interface IUser
+    public interface IUser
     {
 
         

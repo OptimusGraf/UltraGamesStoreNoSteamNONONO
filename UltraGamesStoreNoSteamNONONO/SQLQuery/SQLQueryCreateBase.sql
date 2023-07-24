@@ -10,7 +10,7 @@ CREATE TABLE Users
 	id INT IDENTITY  PRIMARY KEY,
 	username nvarchar(20) UNIQUE,
 	pasword nvarchar(20),
-	moneyOfuser int,
+	moneyOfuser MONEY,
 	age int ,
 	PowerOfPC int,
 	image VARBINARY(MAX)
@@ -20,7 +20,7 @@ CREATE TABLE Games
 (
 	id INT IDENTITY  PRIMARY KEY,
 	nameOfGame nvarchar(20) UNIQUE,
-	price int,
+	price MONEY,
 	rate int,
 	recAge int,
 	release DATE ,

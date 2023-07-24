@@ -13,6 +13,7 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class Form2 : Form
     {
+        // уведомления, отзовы, исключения, асинхи, фильтрация, даты выхода и изображения 
         IMarket market;
 
 
@@ -27,12 +28,29 @@ namespace UltraGamesStoreNoSteamNONONO
             string connection = ConfigurationManager.ConnectionStrings["base"].ConnectionString;
             market = new Market(connection);
             market.SQLBase.OpenConnection();
+            //. SignIn();
+
+
+        }
+
+        private void SignIn()
+        {
             signin signin = new signin(market);
+
+            this.Hide();
             signin.ShowDialog();
             if (signin.DialogResult != DialogResult.OK)
-                 this.Close();
-            MessageBox.Show("Вы успешно вошли в аккаунт");
+                this.Close();
+            else
+            {
+                MessageBox.Show("Вы успешно вошли в аккаунт");
+                this.Show();
+            }
+        }
 
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SignIn();
         }
     }
 

@@ -2,7 +2,7 @@
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal interface IGame
+    public interface IGame
     {
         static public event Action Changed;
         public SQLBase SQLBase { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal interface IMarket
+    public interface IMarket
     {
         public IUser CurrentUser { get;  }
         public SQLBase SQLBase { get; set; }

@@ -12,9 +12,9 @@ using System.Xml.Linq;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal class User : IUser
+    public class User : IUser
     {
-        public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (int)row["moneyOfuser"])
+        public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
             basket = new ListOfGames(sqlBase, id, "UsersListBasket");
@@ -24,7 +24,7 @@ namespace UltraGamesStoreNoSteamNONONO
             //ДОБАВИТЬ КАРТИНКИ;
         }
 
-        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPC, Image image, int money)
+        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPC, Image image, decimal money)
         {
             this.sqlBase = sqlBase;
             this.id = id;
@@ -63,7 +63,7 @@ namespace UltraGamesStoreNoSteamNONONO
             string query = "INSERT Users VALUES(@name, @password,0,@age,@powerOfPC, null)";
             sqlBase.NoResultQuery(query, parametrs);
 
-            query = "INSERT Users VALUES(@name, @password,0,@age,@powerOfPC, null)";
+            query = "SELECT Id FROM Users WHERE username= @name";
             int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
             User user = new User(sqlBase, id, username, age, powerOfPc, null, 0);
             return user;
@@ -71,7 +71,7 @@ namespace UltraGamesStoreNoSteamNONONO
         }
 
         SQLBase sqlBase;
-        public SQLBase SQLBase { get => SQLBase; set => SQLBase = value;  }
+        public SQLBase SQLBase { get => SQLBase; set => SQLBase = value; }
         readonly int id;
         string userName;
         public string UserName => userName;
@@ -79,12 +79,12 @@ namespace UltraGamesStoreNoSteamNONONO
         public int Age => age;
 
         int powerOfPC;
-        public int PowerOfPC { get => powerOfPC;  set {  powerOfPC = value; UpdateInfoAboutUser(); }  }
-  
+        public int PowerOfPC { get => powerOfPC; set { powerOfPC = value; UpdateInfoAboutUser(); } }
+
         Image image;
         public Image Image { get => image; set { image = value; UpdateInfoAboutUser(); } }
 
-         private decimal money;
+        private decimal money;
         public decimal Money { get => money; set { money = value; UpdateInfoAboutUser(); } }
 
         private ListOfGames basket;
@@ -101,7 +101,7 @@ namespace UltraGamesStoreNoSteamNONONO
         private void LoadDataCreatedGames()
         {
             Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("name", userName) };
-            string query = $"SELECT * FROM Games WHERE author =@name  )";
+            string query = $"SELECT * FROM Games WHERE author =@name";
 
             DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
 
@@ -119,8 +119,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
             byte[] newImage = Image.FromImageToByteArray();
             Tuple<string, object>[] parameters
-                = { 
-                new Tuple<string, object>("id", id), 
+                = {
+                new Tuple<string, object>("id", id),
                 new Tuple<string, object>("newImage", newImage),
                 new Tuple<string, object>("newPower", powerOfPC),
                 new Tuple<string, object>("money", money)

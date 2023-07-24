@@ -3,7 +3,7 @@ using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal class Game : IGame
+    public class Game : IGame
     {
 
         //реализовать метод newgame
@@ -50,7 +50,7 @@ namespace UltraGamesStoreNoSteamNONONO
         readonly int gameId;
         public int GameId => gameId;
 
-        public string name;
+         string name;
         public string Name { get => name; set { name = value; UpdateInfoAboutGames(); } }
 
         string author;
