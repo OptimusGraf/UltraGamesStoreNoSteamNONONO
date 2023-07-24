@@ -3,7 +3,7 @@ using System.Data;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public class Game : IGame
+    public class Game 
     {
 
         //реализовать метод newgame
@@ -83,13 +83,13 @@ namespace UltraGamesStoreNoSteamNONONO
         public override bool Equals(object? obj) => ((obj is Game) && ((Game)obj).gameId == this.gameId);
         public override int GetHashCode() =>  this.gameId.GetHashCode();
 
-        static public List<IGame> GetTenGames(int cursor,SQLBase sqlBase)
+        static public List<Game> GetTenGames(int cursor,SQLBase sqlBase)
         {
             string query = "SELECT * FROM Games ORDER BY ID OFFSET @cursor ROWS NEXT 10 ROWS ONLY";
             Tuple<string, object>[] parameters = { new Tuple<string, object>("cursor", cursor) };
             DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
 
-            List<IGame> list = new List<IGame>();
+            List<Game> list = new List<Game>();
             foreach (DataRow row in table.Rows) 
             {
                 list.Add(new Game(row, sqlBase));

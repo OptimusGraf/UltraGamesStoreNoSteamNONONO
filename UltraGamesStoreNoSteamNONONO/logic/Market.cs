@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace UltraGamesStoreNoSteamNONONO
 {// асинки добавить, изменение инфомрации об акке и играх
@@ -24,17 +25,17 @@ namespace UltraGamesStoreNoSteamNONONO
             this.sqlBase = new SQLBase(connection);
         }
 
-        public IUser CurrentUser => currentUser;
+        public User CurrentUser => currentUser;
 
 
-        public void AddToBasketList(IGame game)
+        public void AddToBasketList(Game game)
         {
                                                                                                                                                                                        
             CurrentUser.Basket.AddGame(game);
             ChangedUI?.Invoke();
         }
 
-        public void AddToWantedList(IGame game)
+        public void AddToWantedList(Game game)
         {
             CurrentUser.WantedGames.AddGame(game);
             ChangedUI?.Invoke();
@@ -72,34 +73,34 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        public HashSet<IGame> GetBasketList()
+        public HashSet<Game> GetBasketList()
         {
             return CurrentUser.Basket.Games;
         }
       
-        public List<IGame> TopTenGamesFrom(int cursor = 0)
+        public List<Game> TopTenGamesFrom(int cursor = 0)
         {
         return Game.GetTenGames(cursor, sqlBase);
         }
    
-        public HashSet<IGame> GetUsersListOfGames()
+        public HashSet<Game> GetUsersListOfGames()
         {
             return CurrentUser.AvailableGames.Games;
         }
 
-        public HashSet<IGame> GetWantedList()
+        public HashSet<Game> GetWantedList()
         {
             return CurrentUser.WantedGames.Games;
         }
 
-        public void RemoveFromBasketList(IGame game)
+        public void RemoveFromBasketList(Game game)
         {
             CurrentUser.Basket.DeleteGame(game);
 
             ChangedUI?.Invoke();
         }
 
-        public void RemoveFromWantedList(IGame game)
+        public void RemoveFromWantedList(Game game)
         {
             CurrentUser.WantedGames.DeleteGame(game);
             ChangedUI?.Invoke();

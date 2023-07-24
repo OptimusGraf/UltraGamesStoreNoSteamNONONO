@@ -12,14 +12,14 @@ using System.Xml.Linq;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public class User : IUser
+    public class User
     {
         public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
             basket = new ListOfGames(sqlBase, id, "UsersListBasket");
             wantedGames = new ListOfGames(sqlBase, id, "UsersListOfWanted");
-            createdGames = new List<IGame>();
+            createdGames = new List<Game>();
             UpdateInfoAboutGames();
             //ДОБАВИТЬ КАРТИНКИ;
         }
@@ -96,8 +96,8 @@ namespace UltraGamesStoreNoSteamNONONO
         private ListOfGames availableGames;
         public ListOfGames AvailableGames => availableGames;
 
-        private List<IGame> createdGames;
-        public List<IGame> CreatedGames => createdGames;
+        private List<Game> createdGames;
+        public List<Game> CreatedGames => createdGames;
         private void LoadDataCreatedGames()
         {
             Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("name", userName) };
@@ -105,7 +105,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
             DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
 
-            List<IGame> list = new List<IGame>();
+            List<Game> list = new List<Game>();
             foreach (DataRow item in table.Rows)
             {
                 Game game = new Game(item, sqlBase);

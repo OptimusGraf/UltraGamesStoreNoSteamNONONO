@@ -9,7 +9,7 @@ namespace UltraGamesStoreNoSteamNONONO
     public class ListOfGames
     {
         SQLBase sqlBase;
-        private HashSet<IGame> games;
+        private HashSet<Game> games;
         int userId;
         string nameOfTable;
         public ListOfGames(SQLBase sqlBase, int userId, string nameOfTable)
@@ -20,7 +20,7 @@ namespace UltraGamesStoreNoSteamNONONO
             LoadData();
         }
 
-        public HashSet<IGame> Games => games;
+        public HashSet<Game> Games => games;
 
         public void LoadData()
         {
@@ -29,7 +29,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
             DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
 
-            HashSet<IGame> set = new HashSet<IGame>();
+            HashSet<Game> set = new HashSet<Game>();
             foreach (DataRow item in table.Rows)
             {
                 Game game = new Game(item, sqlBase);
@@ -37,7 +37,7 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             games = set;
         }
-        public void AddGame(IGame game)
+        public void AddGame(Game game)
         {
             if (!games.Contains(game))
             {
@@ -49,7 +49,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
             }
         }
-        public void DeleteGame(IGame game)
+        public void DeleteGame(Game game)
         {
             // А ЕСЛИ НЕ СОДЕРЖИТ
             if (games.Contains(game))
