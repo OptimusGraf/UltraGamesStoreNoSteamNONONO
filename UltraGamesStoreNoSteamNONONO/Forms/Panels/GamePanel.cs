@@ -24,7 +24,7 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             foreach (Game game in list)
             {
-                GameView control = new GameView(game.Name, game.Author, game.Icon);
+                GameView control = new GameView(game,Market);
                 this.Controls.Add(control);
             }
         }

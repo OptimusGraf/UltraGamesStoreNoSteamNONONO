@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraGamesStoreNoSteamNONONO.Forms.GameViews;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -16,10 +15,12 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         public override void UpdateView()
         {
+            Controls.Clear();
+
             HashSet<Game> list=  Market.GetUsersListOfGames();
             foreach (UserGame game in list)
             {
-                GameViewUser control = new GameViewUser(game.Name, game.Author, game.Icon,game.IsLoaded );
+                GameViewUser control = new GameViewUser(game,Market);
                 this.Controls.Add(control);
             }
         }

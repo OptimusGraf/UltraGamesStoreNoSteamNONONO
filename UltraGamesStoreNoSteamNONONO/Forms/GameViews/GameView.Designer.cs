@@ -76,6 +76,7 @@
             button1.TabIndex = 4;
             button1.Text = "В корзину";
             button1.UseVisualStyleBackColor = false;
+     
             // 
             // button2
             // 
@@ -87,6 +88,7 @@
             button2.TabIndex = 5;
             button2.Text = "В желаемое";
             button2.UseVisualStyleBackColor = false;
+
             // 
             // labelDate
             // 

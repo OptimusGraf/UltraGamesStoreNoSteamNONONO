@@ -14,6 +14,7 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public class User
     {
+        // списки игр можно попробовать сделать через generic 
         public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
@@ -125,8 +126,8 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("newPower", powerOfPC),
                 new Tuple<string, object>("money", money)
              };
-
-            sqlBase.NoResultQuery("UPDATE Users SET image = @newImage,PowerOfPC=@newPower, moneyofuser = @money  WHERE id=@id", parameters);
+            string query = "UPDATE Users SET image = @newImage,PowerOfPC=@newPower, moneyofuser = @money  WHERE id=@id";
+            sqlBase.NoResultQuery(query, parameters);
         }
         public void UpdateInfoAboutGames()
         {

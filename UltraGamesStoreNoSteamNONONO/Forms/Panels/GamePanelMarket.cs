@@ -12,9 +12,11 @@ namespace UltraGamesStoreNoSteamNONONO
         {
         }
         int cursor = 0;
+        public int Cursor { get=>cursor; set=>cursor=value; }
         public override void UpdateView()
         {
-            List<Game> list = Market.TopTenGamesFrom(0);
+            Controls.Clear();
+            List<Game> list = Market.TopTenGamesFrom(cursor);
             base.AddToPanel(list);
         }
     }

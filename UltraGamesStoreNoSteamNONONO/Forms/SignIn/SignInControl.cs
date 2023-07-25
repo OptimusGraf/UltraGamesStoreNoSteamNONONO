@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
+    // Тут разобраться с искл
     internal partial class SignInControl : UserControl
     {
         IMarket market;

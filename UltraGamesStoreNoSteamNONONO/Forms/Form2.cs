@@ -13,15 +13,13 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class Form2 : Form
     {
-        // уведомления; отзовы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения
+        // уведомления; отзовы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения;
+        // если игра есть в коризне (или другом) сделать чтобы кнопка менялась
         IMarket market;
-
 
         public Form2()
         {
-
             InitializeComponent();
-
 
         }
 
@@ -30,24 +28,39 @@ namespace UltraGamesStoreNoSteamNONONO
             string connection = ConfigurationManager.ConnectionStrings["base"].ConnectionString;
             market = new Market(connection);
             market.SQLBase.OpenConnection();
-            SignIn();
-            GamePanelMarket gameMarketPanel = new GamePanelMarket(market);
-          
-            marketPanel.Controls.Add(gameMarketPanel);
+
+            if (SignIn())
+            {
+                AddView(new GamePanelMarket(market), marketPanel);
+                AddView(new GamePanelBassket(market), panelBassket);
+                AddView(new GamePanelWanted(market), panelWanted);
+                AddView(new GamePanelUsers(market), panelLibary);
+            }
 
         }
 
-        private void SignIn()
+
+        private void AddView(IView userPanel, Panel panel)
+        {
+            market.ChangedUI += userPanel.UpdateView;
+            panel?.Controls.Add(userPanel as Control);
+        }
+
+        private bool SignIn()
         {
             signin signin = new signin(market);
 
             this.Hide();
             signin.ShowDialog();
             if (signin.DialogResult != DialogResult.OK)
+            {
                 this.Close();
+                return false;
+            }
             else
             {
                 MessageBox.Show("Вы успешно вошли в аккаунт");
+                return true;
                 this.Show();
             }
         }

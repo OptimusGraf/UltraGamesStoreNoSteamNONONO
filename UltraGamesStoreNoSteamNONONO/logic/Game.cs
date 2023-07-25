@@ -27,8 +27,12 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("author",author),
                 new Tuple<string,object> ("powerOfPC", powerOfPc)};
 
-            sqlBase.NoResultQuery("INSERT Games VALUES(@name, @price,@rate,@recAge,@date,@author,@powerOfPC, null,null)", parametrs);
-            int id = (int)(sqlBase.DataQuery("SELECT id FROM Games WHERE nameOfGame = @name", parametrs).Tables[0].Rows[0]["id"]);
+            string query = "INSERT Games VALUES(@name, @price,@rate,@recAge,@date,@author,@powerOfPC, null,null)";
+            sqlBase.NoResultQuery(query, parametrs);
+
+            query = "SELECT id FROM Games WHERE nameOfGame = @name";
+            int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
+
             Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, null, money, null, sqlBase);
             return game;
         }
@@ -110,7 +114,8 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("recAge",recAge),
                 new Tuple<string,object> ("powerOfPC", powerOfPc),
                  new Tuple<string, object>("newimageOfGame", newimageOfGame),
-                  new Tuple<string, object>("newicon", newIcon)
+                  new Tuple<string, object>("newicon", newIcon),
+                  new Tuple<string, object>("id", GameId)
             };
             
             sqlBase.NoResultQuery(query, parameters);

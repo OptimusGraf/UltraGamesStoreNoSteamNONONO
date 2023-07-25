@@ -10,7 +10,7 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         SQLBase sqlBase;
         private HashSet<Game> games;
-        int userId;
+        readonly int userId;
         string nameOfTable;
         public ListOfGames(SQLBase sqlBase, int userId, string nameOfTable)
         {
@@ -32,7 +32,13 @@ namespace UltraGamesStoreNoSteamNONONO
             HashSet<Game> set = new HashSet<Game>();
             foreach (DataRow item in table.Rows)
             {
-                Game game = new Game(item, sqlBase);
+                Game game;
+                if (nameOfTable == "UsersListOfGames")
+                {
+                    game = new UserGame(userId, item, sqlBase);
+                }
+                else
+                    game = new Game(item, sqlBase);
                 set.Add(game);
             }
             games = set;
@@ -44,7 +50,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 // ТУТ НАДО ОБРАБОТКУ ИСКЛЮЧЕНИЙ 
                 games.Add(game);
                 Tuple<string, object>[] parametrs = { new Tuple<string, object>("userid", userId), new Tuple<string, object>("gameid", game.GameId) };
-                string query = $"INSERT {nameOfTable} (UserId,GameId) VALUE (@userid, @gameid)";
+                string query = $"INSERT {nameOfTable} (UserId,GamesId) VALUES (@userid, @gameid)";
                 sqlBase.NoResultQuery(query, parametrs);
 
             }
@@ -59,6 +65,11 @@ namespace UltraGamesStoreNoSteamNONONO
                 string query = $"DELETE FROM {nameOfTable} WHERE GamesId = @gameid AND  UserId = @userid";
                 sqlBase.NoResultQuery(query, parametrs);
             }
+        }
+
+        public bool ContainGame(Game game)
+        {
+            return games.Contains(game);
         }
 
     }

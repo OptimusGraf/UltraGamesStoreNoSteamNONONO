@@ -15,6 +15,7 @@ namespace UltraGamesStoreNoSteamNONONO
         {
 
             // тут проблема а если есть???7
+            id=userId;
             Tuple<string, object>[] parametrs = { new Tuple<string, object>("userId", userId), new Tuple<string, object>("gameId", GameId) };
             DataSet userGameData = sqlBase.DataQuery
                 (
@@ -34,7 +35,7 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             else
             {
-                sqlBase.NoResultQuery("INSERT UsersListOfGames VALUES(@userId, @gamesId,0,0,0)", parametrs);
+              //  sqlBase.NoResultQuery("INSERT UsersListOfGames VALUES(@userId, @gameId,0,0,0)", parametrs);
             }
         }
 

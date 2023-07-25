@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace UltraGamesStoreNoSteamNONONO
-{// асинки добавить, изменение инфомрации об акке и играх
+{// асинки добавить, изменение инфомрации об акке и играх, передлать в бул
     public class Market : IMarket
     {
         SQLBase sqlBase;
@@ -41,6 +41,7 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
+        
         public void BuyGames()
         {
 

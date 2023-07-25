@@ -1,3 +1,3 @@
 ﻿USE MyGameStore
-DELETE Users WHERE username = 'cowboy';
-SELECT * FROM Users
+DELETE FROM UsersListOfWanted WHERE UserId=1
+DELETE FROM UsersListBasket WHERE UserId=1

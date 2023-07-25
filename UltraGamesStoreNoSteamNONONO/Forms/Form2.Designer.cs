@@ -48,6 +48,9 @@
             tabPageBasket = new TabPage();
             tabPageLibary = new TabPage();
             contextMenuStrip1 = new ContextMenuStrip(components);
+            panelWanted = new Panel();
+            panelBassket = new Panel();
+            panelLibary = new Panel();
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageMarket.SuspendLayout();
@@ -57,6 +60,9 @@
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            tabPageWanted.SuspendLayout();
+            tabPageBasket.SuspendLayout();
+            tabPageLibary.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -202,6 +208,7 @@
             // 
             // tabPageWanted
             // 
+            tabPageWanted.Controls.Add(panelWanted);
             tabPageWanted.Location = new Point(4, 24);
             tabPageWanted.Name = "tabPageWanted";
             tabPageWanted.Padding = new Padding(3);
@@ -212,6 +219,7 @@
             // 
             // tabPageBasket
             // 
+            tabPageBasket.Controls.Add(panelBassket);
             tabPageBasket.Location = new Point(4, 24);
             tabPageBasket.Name = "tabPageBasket";
             tabPageBasket.Padding = new Padding(3);
@@ -223,6 +231,7 @@
             // tabPageLibary
             // 
             tabPageLibary.BackColor = SystemColors.Window;
+            tabPageLibary.Controls.Add(panelLibary);
             tabPageLibary.Location = new Point(4, 24);
             tabPageLibary.Name = "tabPageLibary";
             tabPageLibary.Padding = new Padding(3);
@@ -234,6 +243,30 @@
             // 
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
+            // 
+            // panelWanted
+            // 
+            panelWanted.Dock = DockStyle.Fill;
+            panelWanted.Location = new Point(3, 3);
+            panelWanted.Name = "panelWanted";
+            panelWanted.Size = new Size(772, 358);
+            panelWanted.TabIndex = 0;
+            // 
+            // panelBassket
+            // 
+            panelBassket.Dock = DockStyle.Fill;
+            panelBassket.Location = new Point(3, 3);
+            panelBassket.Name = "panelBassket";
+            panelBassket.Size = new Size(772, 358);
+            panelBassket.TabIndex = 0;
+            // 
+            // panelLibary
+            // 
+            panelLibary.Dock = DockStyle.Fill;
+            panelLibary.Location = new Point(3, 3);
+            panelLibary.Name = "panelLibary";
+            panelLibary.Size = new Size(786, 392);
+            panelLibary.TabIndex = 0;
             // 
             // Form2
             // 
@@ -258,6 +291,9 @@
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            tabPageWanted.ResumeLayout(false);
+            tabPageBasket.ResumeLayout(false);
+            tabPageLibary.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -283,5 +319,8 @@
         private SplitContainer splitContainer1;
         private Label label1;
         private Panel marketPanel;
+        private Panel panelWanted;
+        private Panel panelBassket;
+        private Panel panelLibary;
     }
 }

@@ -15,8 +15,10 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         public override void UpdateView()
         {
+            Controls.Clear();
             HashSet<Game> list = Market.GetWantedList();
             base.AddToPanel(list);
+       
         }
     }
 }

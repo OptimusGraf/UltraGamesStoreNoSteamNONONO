@@ -12,7 +12,7 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             using (MemoryStream mStream = new MemoryStream())
             {
-                image.Save(mStream, image.RawFormat);
+                image?.Save(mStream, image.RawFormat);
                 return mStream.ToArray();
             }
         }
