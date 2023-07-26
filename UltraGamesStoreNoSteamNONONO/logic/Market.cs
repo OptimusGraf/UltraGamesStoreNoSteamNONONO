@@ -8,9 +8,10 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
-{// асинки добавить, изменение инфомрации об акке и играх, передлать в бул
+{// асинки добавить, изменение инфомрации об  играх, передлать в бул
     public class Market : IMarket
     {
         SQLBase sqlBase;
@@ -19,6 +20,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public event Action ChangedUI;
         private User currentUser;
+        
+
 
         public Market(string connection)
         {
@@ -27,6 +30,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public User CurrentUser => currentUser;
 
+        public decimal UsersMoney { get => currentUser.Money; set { currentUser.Money = value; ChangedUI?.Invoke(); } }
 
         public void AddToBasketList(Game game)
         {
@@ -47,21 +51,21 @@ namespace UltraGamesStoreNoSteamNONONO
 
             decimal sum = 0;
             int recAge = 0;
-            foreach (var item in CurrentUser.Basket.Games)
+            foreach (var game in CurrentUser.Basket.Games)
             {
-                sum += item.Money;
-                recAge = Math.Max(recAge, item.RecAge);
+                sum += game.Money;
+                recAge = Math.Max(recAge, game.RecAge);
             }
 
             if (CurrentUser.Money >= sum && CurrentUser.Age>= recAge)
             {
                 CurrentUser.Money -= sum;
-                foreach (var item in CurrentUser.Basket.Games)
+                foreach (var game in CurrentUser.Basket.Games)
                 {
                     //ИСКЛЮЧЕНИЯ
-                    CurrentUser.AvailableGames.AddGame(item);
-                    currentUser.Basket.DeleteGame(item);
-                    currentUser.WantedGames.DeleteGame(item);
+                    CurrentUser.AvailableGames.AddGame(UserGame.NewUserGame(game,currentUser.id,sqlBase));
+                    currentUser.Basket.DeleteGame(game);
+                    currentUser.WantedGames.DeleteGame(game);
                 }
             }
 
@@ -130,6 +134,31 @@ namespace UltraGamesStoreNoSteamNONONO
             
         }
 
-     
+        public bool BassketContainGames(Game game)
+        {
+            return currentUser.Basket.ContainGame(game);
+        }
+
+        public bool WantedContainGames(Game game)
+        {
+          return  currentUser.WantedGames.ContainGame(game);
+        }
+
+        public bool AvaibaleContainGames(Game game)
+        {
+            return currentUser.AvailableGames.ContainGame(game);
+
+        }
+
+        public void SetInfoAboutUser(  int age, int powerOfPc, Image image)
+        {
+            currentUser.UserInfo = new UserInfo( age, powerOfPc, image);
+            ChangedUI?.Invoke();
+        }
+
+        public UserInfo GetInfoAboutUser()
+        {
+            return currentUser.UserInfo;
+        }
     }
 }

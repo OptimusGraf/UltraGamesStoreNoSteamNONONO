@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Xml;
 using System.Xml.Linq;
+using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -25,18 +26,38 @@ namespace UltraGamesStoreNoSteamNONONO
             //ДОБАВИТЬ КАРТИНКИ;
         }
 
-        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPC, Image image, decimal money)
+        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPc, Image image, decimal money)
         {
             this.sqlBase = sqlBase;
             this.id = id;
             this.userName = userName;
             this.age = age;
-            this.powerOfPC = powerOfPC;
-            this.image = image;
+            this.powerOfPc = powerOfPc;
             this.money = money;
+            this.image = image;
 
         }
-
+        string userName;
+        public string UserName => userName;
+        private decimal money;
+        int age;
+        public int Age { get => age; }
+        int powerOfPc;
+        public int PowerOfPc { get => powerOfPc; }
+        Image image;
+        public Image Image { get => image; }
+        public decimal Money { get => money; set { money = value; UpdateInfoAboutUser(); } }
+        public UserInfo UserInfo
+        {
+            get => new UserInfo(UserName, age, powerOfPc, image);
+            set
+            {
+                age = (value as UserInfo).Age;
+                powerOfPc = (value as UserInfo).PowerOfPC;
+                image = (value as UserInfo).Image;
+                UpdateInfoAboutUser();
+            }
+        }
         static public User SingIn(string name, string pasword, SQLBase sqlBase)
         {
             // исключения, момент когда нет такого логина и пароля
@@ -73,20 +94,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
         SQLBase sqlBase;
         public SQLBase SQLBase { get => SQLBase; set => SQLBase = value; }
-        readonly int id;
-        string userName;
-        public string UserName => userName;
-        int age;
-        public int Age => age;
+        public readonly int id;
 
-        int powerOfPC;
-        public int PowerOfPC { get => powerOfPC; set { powerOfPC = value; UpdateInfoAboutUser(); } }
-
-        Image image;
-        public Image Image { get => image; set { image = value; UpdateInfoAboutUser(); } }
-
-        private decimal money;
-        public decimal Money { get => money; set { money = value; UpdateInfoAboutUser(); } }
 
         private ListOfGames basket;
         public ListOfGames Basket => basket;
@@ -99,6 +108,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private List<Game> createdGames;
         public List<Game> CreatedGames => createdGames;
+
+
         private void LoadDataCreatedGames()
         {
             Tuple<string, object>[] parametrs = new Tuple<string, object>[] { new Tuple<string, object>("name", userName) };
@@ -118,15 +129,15 @@ namespace UltraGamesStoreNoSteamNONONO
         private void UpdateInfoAboutUser()
         {
 
-            byte[] newImage = Image.FromImageToByteArray();
             Tuple<string, object>[] parameters
                 = {
                 new Tuple<string, object>("id", id),
-                new Tuple<string, object>("newImage", newImage),
-                new Tuple<string, object>("newPower", powerOfPC),
+                new Tuple<string, object>("newImage", image.FromImageToByteArray()),
+                new Tuple<string, object>("newPower", powerOfPc),
+                new Tuple<string, object>("age", age),
                 new Tuple<string, object>("money", money)
              };
-            string query = "UPDATE Users SET image = @newImage,PowerOfPC=@newPower, moneyofuser = @money  WHERE id=@id";
+            string query = "UPDATE Users SET image = @newImage,PowerOfPC=@newPower, moneyofuser = @money, age = @age  WHERE id=@id";
             sqlBase.NoResultQuery(query, parameters);
         }
         public void UpdateInfoAboutGames()

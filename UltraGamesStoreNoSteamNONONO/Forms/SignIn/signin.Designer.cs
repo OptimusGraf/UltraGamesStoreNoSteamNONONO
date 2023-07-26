@@ -1,6 +1,6 @@
 ﻿namespace UltraGamesStoreNoSteamNONONO
 {
-    partial class signin
+    partial class SignIn
     {
         /// <summary>
         /// Required designer variable.

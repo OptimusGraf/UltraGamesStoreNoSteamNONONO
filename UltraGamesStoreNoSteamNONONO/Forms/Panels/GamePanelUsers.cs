@@ -18,9 +18,9 @@ namespace UltraGamesStoreNoSteamNONONO
             Controls.Clear();
 
             HashSet<Game> list=  Market.GetUsersListOfGames();
-            foreach (UserGame game in list)
+            foreach (Game game in list)
             {
-                GameViewUser control = new GameViewUser(game,Market);
+                GameViewUser control = new GameViewUser((UserGame)game,Market);
                 this.Controls.Add(control);
             }
         }

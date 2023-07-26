@@ -32,7 +32,7 @@
             menuStrip1 = new MenuStrip();
             userToolStripMenuItem = new ToolStripMenuItem();
             infoToolStripMenuItem = new ToolStripMenuItem();
-            menutoolStripMenuItem = new ToolStripMenuItem();
+            moneytoolStripMenuItem = new ToolStripMenuItem();
             MasterToolStripMenuItem = new ToolStripMenuItem();
             CreateToolStripMenuItem = new ToolStripMenuItem();
             CreatedToolStripMenuItem = new ToolStripMenuItem();
@@ -45,12 +45,12 @@
             label1 = new Label();
             marketPanel = new Panel();
             tabPageWanted = new TabPage();
-            tabPageBasket = new TabPage();
-            tabPageLibary = new TabPage();
-            contextMenuStrip1 = new ContextMenuStrip(components);
             panelWanted = new Panel();
+            tabPageBasket = new TabPage();
             panelBassket = new Panel();
+            tabPageLibary = new TabPage();
             panelLibary = new Panel();
+            contextMenuStrip1 = new ContextMenuStrip(components);
             menuStrip1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPageMarket.SuspendLayout();
@@ -76,11 +76,10 @@
             // 
             // userToolStripMenuItem
             // 
-            userToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { infoToolStripMenuItem, menutoolStripMenuItem, MasterToolStripMenuItem });
+            userToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { infoToolStripMenuItem, moneytoolStripMenuItem, MasterToolStripMenuItem });
             userToolStripMenuItem.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             userToolStripMenuItem.Name = "userToolStripMenuItem";
-            userToolStripMenuItem.Size = new Size(69, 20);
-            userToolStripMenuItem.Text = "Профиль";
+            userToolStripMenuItem.Size = new Size(12, 20);
             // 
             // infoToolStripMenuItem
             // 
@@ -88,13 +87,15 @@
             infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             infoToolStripMenuItem.Size = new Size(214, 22);
             infoToolStripMenuItem.Text = "Информация об аккаунте";
+            infoToolStripMenuItem.Click += infoToolStripMenuItem_Click;
             // 
-            // menutoolStripMenuItem
+            // moneytoolStripMenuItem
             // 
-            menutoolStripMenuItem.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            menutoolStripMenuItem.Name = "menutoolStripMenuItem";
-            menutoolStripMenuItem.Size = new Size(214, 22);
-            menutoolStripMenuItem.Text = "Счет";
+            moneytoolStripMenuItem.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            moneytoolStripMenuItem.Name = "moneytoolStripMenuItem";
+            moneytoolStripMenuItem.Size = new Size(214, 22);
+            moneytoolStripMenuItem.Text = "Счет";
+            moneytoolStripMenuItem.Click += moneytoolStripMenuItem_Click;
             // 
             // MasterToolStripMenuItem
             // 
@@ -217,6 +218,14 @@
             tabPageWanted.Text = "Список желаемоего";
             tabPageWanted.UseVisualStyleBackColor = true;
             // 
+            // panelWanted
+            // 
+            panelWanted.Dock = DockStyle.Fill;
+            panelWanted.Location = new Point(3, 3);
+            panelWanted.Name = "panelWanted";
+            panelWanted.Size = new Size(772, 358);
+            panelWanted.TabIndex = 0;
+            // 
             // tabPageBasket
             // 
             tabPageBasket.Controls.Add(panelBassket);
@@ -227,6 +236,14 @@
             tabPageBasket.TabIndex = 2;
             tabPageBasket.Text = "Корзина";
             tabPageBasket.UseVisualStyleBackColor = true;
+            // 
+            // panelBassket
+            // 
+            panelBassket.Dock = DockStyle.Fill;
+            panelBassket.Location = new Point(3, 3);
+            panelBassket.Name = "panelBassket";
+            panelBassket.Size = new Size(772, 358);
+            panelBassket.TabIndex = 0;
             // 
             // tabPageLibary
             // 
@@ -239,27 +256,6 @@
             tabPageLibary.TabIndex = 1;
             tabPageLibary.Text = "Библиотека";
             // 
-            // contextMenuStrip1
-            // 
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(61, 4);
-            // 
-            // panelWanted
-            // 
-            panelWanted.Dock = DockStyle.Fill;
-            panelWanted.Location = new Point(3, 3);
-            panelWanted.Name = "panelWanted";
-            panelWanted.Size = new Size(772, 358);
-            panelWanted.TabIndex = 0;
-            // 
-            // panelBassket
-            // 
-            panelBassket.Dock = DockStyle.Fill;
-            panelBassket.Location = new Point(3, 3);
-            panelBassket.Name = "panelBassket";
-            panelBassket.Size = new Size(772, 358);
-            panelBassket.TabIndex = 0;
-            // 
             // panelLibary
             // 
             panelLibary.Dock = DockStyle.Fill;
@@ -267,6 +263,11 @@
             panelLibary.Name = "panelLibary";
             panelLibary.Size = new Size(786, 392);
             panelLibary.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // Form2
             // 
@@ -303,7 +304,7 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem userToolStripMenuItem;
         private ToolStripMenuItem infoToolStripMenuItem;
-        private ToolStripMenuItem menutoolStripMenuItem;
+        private ToolStripMenuItem moneytoolStripMenuItem;
         private ToolStripMenuItem ExitToolStripMenuItem;
         private ToolStripMenuItem MasterToolStripMenuItem;
         private ToolStripMenuItem CreateToolStripMenuItem;

@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    internal partial class signin : Form
+    internal partial class SignIn : Form
     {
         IMarket market;
         UserControl control;
-        public signin(IMarket market) : base()
+        public SignIn(IMarket market) : base()
         {
             this.market = market;
             InitializeComponent();

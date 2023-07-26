@@ -1,3 +1,3 @@
-﻿USE MyGameStore
-DELETE FROM UsersListOfWanted WHERE UserId=1
-DELETE FROM UsersListBasket WHERE UserId=1
+﻿
+DELETE UsersListOfGames WHERE UserId = 2
+SELECT * FROM UsersListOfGames ;

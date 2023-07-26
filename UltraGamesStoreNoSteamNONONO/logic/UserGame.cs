@@ -5,16 +5,18 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Microsoft.VisualBasic.ApplicationServices;
+using System.Xml;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     public class UserGame : Game
     {
 
-        public UserGame(int userId, DataRow row, SQLBase sqlBase) : base(row, sqlBase)
+        public UserGame(int userId, DataRow gameRow, SQLBase sqlBase) : base(gameRow, sqlBase)
         {
 
-            // тут проблема а если есть???7
+            // тут проблема а если нет???7
             id=userId;
             Tuple<string, object>[] parametrs = { new Tuple<string, object>("userId", userId), new Tuple<string, object>("gameId", GameId) };
             DataSet userGameData = sqlBase.DataQuery
@@ -37,6 +39,22 @@ namespace UltraGamesStoreNoSteamNONONO
             {
               //  sqlBase.NoResultQuery("INSERT UsersListOfGames VALUES(@userId, @gameId,0,0,0)", parametrs);
             }
+        }
+   
+        public static UserGame NewUserGame(Game game, int userId, SQLBase sqlBase)
+        {
+
+            Tuple<string, object>[] parametrs = { new Tuple<string, object>("userId", userId), new Tuple<string, object>("gameId", game.GameId) };
+
+            string query = "INSERT UsersListOfGames (UserId,GamesId) VALUES (@userId, @gameId)";
+            sqlBase.NoResultQuery(query, parametrs);
+
+             query = $"SELECT * FROM Games WHERE Games.id = @gameId AND Games.id IN (SELECT GamesId FROM UsersListOfGames WHERE UserId = @userId )";
+            DataTable table = sqlBase.DataQuery(query, parametrs).Tables[0];
+
+            return new UserGame(userId, table.Rows[0], sqlBase);
+
+            
         }
 
         private readonly int id;

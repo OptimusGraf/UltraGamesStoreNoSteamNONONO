@@ -62,7 +62,11 @@ INSERT Users (username,pasword,moneyOfUser,age,PowerOfPC) VALUES
 ('Persik','yalox',1000, 21,50);
 INSERT Games (nameOfGame,price,rate,recAge,release,author,powerOfPc) VALUES
 ('Civil war',200,100,18,'2026-12-20','Persik',20),
-('Anekdots',500,90,18,'2027-12-20','Persik',59);
+('Anekdots',500,90,18,'2027-6-21','Persik',59),
+('UltraAnektod',100,45,10,'2037-11-9','Persik',30),
+('UltraMatan',200,70,16,'2017-6-11','Persik',50),
+('Killeverehting',2000,20,18,'2047-2-11','Persik',90),
+('gametop',1000,20,18,'2047-2-11','Persik',90);
 GO
 INSERT UsersListOfGames VALUES
 (1,1,0,0,0)

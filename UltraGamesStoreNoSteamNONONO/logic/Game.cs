@@ -6,7 +6,6 @@ namespace UltraGamesStoreNoSteamNONONO
     public class Game 
     {
 
-        //реализовать метод newgame
         public Game(DataRow row, SQLBase sqlBase) : this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003,7,12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], null, (decimal)row["price"], null, sqlBase)
         {
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
@@ -36,7 +35,7 @@ namespace UltraGamesStoreNoSteamNONONO
             Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, null, money, null, sqlBase);
             return game;
         }
-        private Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge,Image icon, decimal money, Image imageOfGame, SQLBase sqlBase)
+        protected Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge,Image icon, decimal money, Image imageOfGame, SQLBase sqlBase)
         {
             this.name = name;
             this.gameId = id;

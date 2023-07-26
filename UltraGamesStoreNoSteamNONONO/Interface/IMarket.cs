@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     public interface IMarket
     {
-        public User CurrentUser { get;  }
         public SQLBase SQLBase { get; set; }
         public void SignIn(string name, string pasword);
         public void SignOut();
@@ -22,10 +22,17 @@ namespace UltraGamesStoreNoSteamNONONO
         public void RemoveFromBasketList(Game game);
         public void AddToWantedList(Game game);
         public void RemoveFromWantedList(Game game);
+
         public void BuyGames();
         public void CreateGame(string nameOfGame, int money, int rate, int recAge, DateOnly date, int powerOfPc, string author, SQLBase sqlBase);
         public event Action ChangedUI;
 
+        public bool BassketContainGames(Game game);
+        public bool WantedContainGames(Game game);
+        public bool AvaibaleContainGames(Game game);
+        public decimal UsersMoney { get; set; }
+        public void SetInfoAboutUser(  int age, int powerOfPc, Image image);
+        public UserInfo GetInfoAboutUser();
      
 
     }

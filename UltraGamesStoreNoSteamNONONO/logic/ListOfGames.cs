@@ -43,6 +43,14 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             games = set;
         }
+        public void AddGame(UserGame game)
+        {
+            if (!games.Contains(game))
+            {
+                // ТУТ НАДО ОБРАБОТКУ ИСКЛЮЧЕНИЙ 
+                games.Add(game);
+            }
+        }
         public void AddGame(Game game)
         {
             if (!games.Contains(game))

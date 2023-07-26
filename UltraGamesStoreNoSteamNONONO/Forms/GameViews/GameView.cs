@@ -31,29 +31,42 @@ namespace UltraGamesStoreNoSteamNONONO
 
         protected virtual void MakeButtons(Game game, IMarket market)
         {
-            if (market.CurrentUser.Basket.ContainGame(game))
+            if (market.AvaibaleContainGames(game) == false)
             {
-                button1.Text = "Удалить из коризны";
-                button1.Click += Button1_ClickRemove;
+                if (market.BassketContainGames(game))
+                {
+                    button1.Text = "Удалить из коризны";
+                    button1.Click += Button1_ClickRemove;
 
+                }
+                else
+                {
+                    button1.Text = "В коризну";
+                    button1.Click += button1_ClickAdd;
+                }
+
+                if (market.WantedContainGames(game))
+                {
+                    button2.Text = "Удалить из желаемого";
+                    button2.Click += Button2_ClickRemove;
+
+                }
+                else
+                {
+                    button2.Enabled = true;
+                    button2.Click += Button2_ClickAdd;
+                } 
             }
             else
             {
-                button1.Text = "В коризну";
-                button1.Click += button1_ClickAdd;
+                button1.Text = "Куплена";
+                button2.Text = "Куплена";
+                button1.Enabled = false;
+                button2.Enabled = false;
             }
 
-            if (market.CurrentUser.WantedGames.ContainGame(game))
-            {
-                button2.Text = "Удалить из желаемого";
-                button2.Click += Button2_ClickRemove;
 
-            }
-            else
-            {
-                button2.Enabled = true;
-                button2.Click += Button2_ClickAdd;
-            }
+            labelName.Text += " цена: " + game.Money.ToString();
         }
 
         private void Button2_ClickAdd(object? sender, EventArgs e)

@@ -15,6 +15,7 @@ namespace UltraGamesStoreNoSteamNONONO
             Dock = DockStyle.Fill;
             WrapContents = false;
             FlowDirection = FlowDirection.TopDown;
+            AutoScroll = true;
             UpdateView();
         }
 
@@ -25,7 +26,7 @@ namespace UltraGamesStoreNoSteamNONONO
             foreach (Game game in list)
             {
                 GameView control = new GameView(game,Market);
-                this.Controls.Add(control);
+                Controls.Add(control);
             }
         }
      

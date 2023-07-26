@@ -13,8 +13,13 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class Form2 : Form
     {
-        // уведомления; отзовы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения;
-        // если игра есть в коризне (или другом) сделать чтобы кнопка менялась
+        // уведомления; отзывы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения;
+        // если игра есть в корзине (или другом списке) сделать чтобы кнопка менялась, если при добавлении игры мощности недостаточно, уведомить пользователя об этом;
+        // если при покупке не получается купить (возвраст), уведомить
+        // в сингин контрол разобраться с искл, так же добавить возможность с окна регестрации вернуться назад на окно авторизации
+        // КАРТИНКИ
+        // списки игр можно попробовать сделать через generic 
+
         IMarket market;
 
         public Form2()
@@ -31,16 +36,19 @@ namespace UltraGamesStoreNoSteamNONONO
 
             if (SignIn())
             {
-                AddView(new GamePanelMarket(market), marketPanel);
-                AddView(new GamePanelBassket(market), panelBassket);
-                AddView(new GamePanelWanted(market), panelWanted);
-                AddView(new GamePanelUsers(market), panelLibary);
+                AddViewOnPanel(new GamePanelMarket(market), marketPanel);
+                AddViewOnPanel(new GamePanelBassket(market), panelBassket);
+                AddViewOnPanel(new GamePanelWanted(market), panelWanted);
+                AddViewOnPanel(new GamePanelUsers(market), panelLibary);
+                moneytoolStripMenuItem.Text = "Cчет: " + market.UsersMoney.ToString();
+                userToolStripMenuItem.Text = market.GetInfoAboutUser().UserName;
+                market.ChangedUI += () => moneytoolStripMenuItem.Text = "Cчет: " + market.UsersMoney.ToString();
             }
 
         }
 
 
-        private void AddView(IView userPanel, Panel panel)
+        private void AddViewOnPanel(IView userPanel, Panel panel)
         {
             market.ChangedUI += userPanel.UpdateView;
             panel?.Controls.Add(userPanel as Control);
@@ -48,7 +56,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private bool SignIn()
         {
-            signin signin = new signin(market);
+            SignIn signin = new SignIn(market);
 
             this.Hide();
             signin.ShowDialog();
@@ -68,6 +76,19 @@ namespace UltraGamesStoreNoSteamNONONO
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SignIn();
+        }
+
+        private void moneytoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MoneyForm moneyForm = new MoneyForm(market);
+            moneyForm.ShowDialog();
+
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form infoForm = new InfoAboutUserForm(market);
+            infoForm.ShowDialog();
         }
     }
 
