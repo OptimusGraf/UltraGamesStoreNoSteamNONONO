@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public partial class Form2 : Form
+    public partial class MainForm : Form
     {
         // уведомления; отзывы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения;
         // если игра есть в корзине (или другом списке) сделать чтобы кнопка менялась, если при добавлении игры мощности недостаточно, уведомить пользователя об этом;
@@ -19,10 +19,16 @@ namespace UltraGamesStoreNoSteamNONONO
         // в сингин контрол разобраться с искл, так же добавить возможность с окна регестрации вернуться назад на окно авторизации
         // КАРТИНКИ
         // списки игр можно попробовать сделать через generic 
+        // поменять гамевью, сделать основной класс абстрактным
+        // добавить на гаймвьюшку в магазине рейтинг
+        // сделать чтобы рейтинг высчитывался на основе отзывов 
+        // в классе маркет для добавления игр в списки реализовать проверки
+        // убрать возможно менять игру в классе game, вместо создавать новый объект 
+        // переделать AddtoflowPanel в gameviews
 
         IMarket market;
 
-        public Form2()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -90,25 +96,16 @@ namespace UltraGamesStoreNoSteamNONONO
             Form infoForm = new InfoAboutUserForm(market);
             infoForm.ShowDialog();
         }
+
+        private void CreatedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form authorForm = new AuthorForm(market);
+            authorForm.ShowDialog();
+        }
+
+       
     }
 
-    class testclass
-    {
 
-        public string name;
-        public string surname;
-        public int id;
-
-        public testclass(string name, string surname, int id)
-        {
-            this.name = name;
-            this.surname = surname;
-            this.id = id;
-        }
-        public override string ToString()
-        {
-            return name + surname + id.ToString();
-        }
-    }
 
 }

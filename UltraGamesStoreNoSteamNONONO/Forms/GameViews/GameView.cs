@@ -16,7 +16,11 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         protected Button Button1 { get => button1; }
         protected Button Button2 { get => button2; }
+        public Game Game { get => game;  }
+
         protected Game game;
+
+
         protected IMarket market;
         public GameView(Game game, IMarket market)
         {
@@ -26,6 +30,7 @@ namespace UltraGamesStoreNoSteamNONONO
             labelName.Text = game.Name;
             labelAuthor.Text = game.Author;
             pictureBox1.Image = game.Icon;
+            this.Dock = DockStyle.Fill;
             MakeButtons(game, market);
         }
 

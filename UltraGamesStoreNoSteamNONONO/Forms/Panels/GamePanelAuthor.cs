@@ -3,28 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UltraGamesStoreNoSteamNONONO.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public class GamePanelUsers : GamePanel
+    public class GamePanelAuthor : GamePanel
     {
-        public GamePanelUsers(IMarket market) : base(market)
+        public GamePanelAuthor(IMarket market) : base(market)
         {
-          
             
         }
         public override void UpdateView()
         {
+            List<Game> list=  Market.GetUserCreatedGames();
             flowLayoutPanel.Controls.Clear();
 
-            HashSet<Game> list=  Market.GetUsersListOfGames();
             foreach (Game game in list)
             {
-                GameViewUser gameView = new GameViewUser((UserGame)game,Market);
+                GameViewAuthor gameView = new GameViewAuthor(game, Market);
                 gameView.DoubleClick += GameView_Click;
 
                 flowLayoutPanel.Controls.Add(gameView);
             }
+
         }
+
+        protected override void Click(GameView view, Game game)
+        {
+            AuthorGameForm form = new AuthorGameForm(Market, game);
+            form.ShowDialog();
+        }
+
     }
 }

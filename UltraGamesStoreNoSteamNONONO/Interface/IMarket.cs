@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -18,6 +17,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public HashSet<Game> GetBasketList();
         public HashSet<Game> GetWantedList();
         public HashSet<Game> GetUsersListOfGames();
+        public List<Game> GetUserCreatedGames();
         public void AddToBasketList(Game game);
         public void RemoveFromBasketList(Game game);
         public void AddToWantedList(Game game);
@@ -33,7 +33,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public decimal UsersMoney { get; set; }
         public void SetInfoAboutUser(  int age, int powerOfPc, Image image);
         public UserInfo GetInfoAboutUser();
-     
 
+        public void ChangeInfoAboutGame(Game game, Image image, Image icon, decimal price, int age, int power);
     }
 }

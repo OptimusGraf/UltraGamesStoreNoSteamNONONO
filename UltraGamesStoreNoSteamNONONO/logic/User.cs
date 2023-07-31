@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Markup;
 using System.Xml;
 using System.Xml.Linq;
-using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
 {

@@ -15,9 +15,8 @@ namespace UltraGamesStoreNoSteamNONONO
         public int Cursor { get=>cursor; set=>cursor=value; }
         public override void UpdateView()
         {
-            Controls.Clear();
             List<Game> list = Market.TopTenGamesFrom(cursor);
-            base.AddToPanel(list);
+            base.AddToFlowPanel(list);
         }
     }
 }

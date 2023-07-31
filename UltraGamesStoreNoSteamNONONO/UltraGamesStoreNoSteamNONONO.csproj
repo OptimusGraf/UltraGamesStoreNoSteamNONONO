@@ -18,6 +18,9 @@
 
   <ItemGroup>
     <Compile Update="Forms\GameViews\GameViewAuthor.cs" />
+    <Compile Update="Forms\Panels\GamePanelAuthor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Forms\Panels\GamePanelBassket.cs">
       <SubType>Component</SubType>
     </Compile>

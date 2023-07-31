@@ -8,7 +8,6 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using UltraGamesStoreNoSteamNONONO.logic;
 
 namespace UltraGamesStoreNoSteamNONONO
 {// асинки добавить, изменение инфомрации об  играх, передлать в бул
@@ -17,18 +16,15 @@ namespace UltraGamesStoreNoSteamNONONO
         SQLBase sqlBase;
         public SQLBase SQLBase { get { return sqlBase; } set { sqlBase = value; } }
 
-
         public event Action ChangedUI;
-        private User currentUser;
-        
 
+        private User currentUser;
+        public User CurrentUser => currentUser;
 
         public Market(string connection)
         {
             this.sqlBase = new SQLBase(connection);
         }
-
-        public User CurrentUser => currentUser;
 
         public decimal UsersMoney { get => currentUser.Money; set { currentUser.Money = value; ChangedUI?.Invoke(); } }
 
@@ -45,7 +41,6 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        
         public void BuyGames()
         {
 
@@ -82,7 +77,7 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             return CurrentUser.Basket.Games;
         }
-      
+     
         public List<Game> TopTenGamesFrom(int cursor = 0)
         {
         return Game.GetTenGames(cursor, sqlBase);
@@ -97,11 +92,13 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             return CurrentUser.WantedGames.Games;
         }
-
+        public List<Game> GetUserCreatedGames()
+        {
+            return currentUser.CreatedGames; 
+        }
         public void RemoveFromBasketList(Game game)
         {
             CurrentUser.Basket.DeleteGame(game);
-
             ChangedUI?.Invoke();
         }
 
@@ -109,21 +106,17 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             CurrentUser.WantedGames.DeleteGame(game);
             ChangedUI?.Invoke();
-
         }
 
         public void SignIn(string name, string pasword)
         {
             currentUser = User.SingIn(name, pasword, sqlBase);
-
             ChangedUI?.Invoke();
-
         }
 
         public void SignOut()
         {
             currentUser = null;
-
             ChangedUI?.Invoke();
         }
 
@@ -131,7 +124,6 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             //ИСКЛЮЧЕНИЯ
            currentUser= User.NewUser(username, age, password, powerOfPc, sqlBase);
-            
         }
 
         public bool BassketContainGames(Game game)
@@ -160,5 +152,16 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             return currentUser.UserInfo;
         }
+
+        public void ChangeInfoAboutGame(Game game,Image image, Image icon, decimal price, int age, int power)
+        {
+            game.ImageOfGame = image;
+            game.Icon = icon;
+            game.Money = price;
+            game.RecAge = age;
+            game.PowerOfPc = power;
+            ChangedUI?.Invoke();
+        }
+
     }
 }

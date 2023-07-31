@@ -93,8 +93,7 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedMaster();
 
         }
-        public override bool Equals(object? obj) => ((obj is UserGame) && ((UserGame)obj).id == this.id);
-        public override int GetHashCode() => this.id.GetHashCode();
+      
 
     }
 }

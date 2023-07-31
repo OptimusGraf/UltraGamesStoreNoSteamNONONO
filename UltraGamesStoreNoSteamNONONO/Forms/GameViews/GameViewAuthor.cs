@@ -10,9 +10,9 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         public GameViewAuthor(Game game, IMarket market) : base(game,market)
         {
-
-            Button1.Text = "Информация";
-            Button2.Text = "Отредактировать";
+            this.Controls.Remove(Button1);
+            this.Controls.Remove(Button2);
+            
         }
         
     }
