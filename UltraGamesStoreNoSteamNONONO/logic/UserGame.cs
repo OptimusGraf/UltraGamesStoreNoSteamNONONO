@@ -32,7 +32,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 id = (int)usergamerow["id"];
                 countOfHour = (int)usergamerow["CountOfHour"];
                 progress = (int)usergamerow["Progress"];
-                IsLoaded = (bool)usergamerow["isLoaded"];
+                isLoaded = (bool)usergamerow["isLoaded"];
 
             }
             else

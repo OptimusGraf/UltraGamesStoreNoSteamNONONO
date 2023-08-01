@@ -6,7 +6,8 @@ namespace UltraGamesStoreNoSteamNONONO
     public class Game 
     {
 
-        public Game(DataRow row, SQLBase sqlBase) : this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003,7,12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], null, (decimal)row["price"], null, sqlBase)
+        public Game(DataRow row, SQLBase sqlBase) : 
+            this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003,7,12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], Helper.FromByteArrayToImage(row["icon"] as byte[]), (decimal)row["price"], Helper.FromByteArrayToImage(row["imageOfGame"] as byte[]), sqlBase)
         {
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
@@ -112,7 +113,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("price", money),
                 new Tuple<string, object>("recAge",recAge),
                 new Tuple<string,object> ("powerOfPC", powerOfPc),
-                 new Tuple<string, object>("newimageOfGame", newimageOfGame),
+                new Tuple<string, object>("newimageOfGame", newimageOfGame),
                   new Tuple<string, object>("newicon", newIcon),
                   new Tuple<string, object>("id", GameId)
             };

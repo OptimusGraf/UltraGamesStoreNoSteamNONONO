@@ -15,13 +15,15 @@ namespace UltraGamesStoreNoSteamNONONO
     public class User
     {
         // списки игр можно попробовать сделать через generic 
-        public User(DataRow row, SQLBase sqlBase) : this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], null, (decimal)row["moneyOfuser"])
+        public User(DataRow row, SQLBase sqlBase) : 
+            this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], Helper.FromByteArrayToImage(row["image"] as byte[]), (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
             basket = new ListOfGames(sqlBase, id, "UsersListBasket");
             wantedGames = new ListOfGames(sqlBase, id, "UsersListOfWanted");
             createdGames = new List<Game>();
             UpdateInfoAboutGames();
+     
             //ДОБАВИТЬ КАРТИНКИ;
         }
 

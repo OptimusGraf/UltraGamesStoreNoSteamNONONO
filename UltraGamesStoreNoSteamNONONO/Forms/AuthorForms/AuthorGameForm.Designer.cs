@@ -136,6 +136,7 @@
             buttonImage.TabIndex = 8;
             buttonImage.Text = "Поменять изображение";
             buttonImage.UseVisualStyleBackColor = true;
+            buttonImage.Click += buttonImage_Click;
             // 
             // buttonIcon
             // 
@@ -146,6 +147,7 @@
             buttonIcon.TabIndex = 9;
             buttonIcon.Text = "Поменять значок";
             buttonIcon.UseVisualStyleBackColor = true;
+            buttonIcon.Click += buttonIcon_Click;
             // 
             // buttonSave
             // 
@@ -165,7 +167,7 @@
             buttonReviews.Name = "buttonReviews";
             buttonReviews.Size = new Size(227, 43);
             buttonReviews.TabIndex = 11;
-            buttonReviews.Text = "Отзовы";
+            buttonReviews.Text = "Отзывы";
             buttonReviews.UseVisualStyleBackColor = true;
             // 
             // numericUpDownPrice

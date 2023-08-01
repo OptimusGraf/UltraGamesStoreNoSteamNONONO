@@ -43,11 +43,32 @@ namespace UltraGamesStoreNoSteamNONONO.Forms
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            ;
+            
             Market.ChangeInfoAboutGame
                 (game, pictureBox1.Image, pictureBox2.Image,
                 numericUpDownPrice.Value, Convert.ToInt32(numericUpDownAge.Value),
                 Convert.ToInt32(numericUpDownPower.Value));
         }
+
+        private void buttonIcon_Click(object sender, EventArgs e)
+        {
+            GetPictureFromDialog(pictureBox2);
+        }
+        private void buttonImage_Click(object sender, EventArgs e)
+        {
+            GetPictureFromDialog(pictureBox1);
+
+        }
+        private void GetPictureFromDialog(PictureBox pictureBox)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.ShowDialog();
+            if (fileDialog.FileName != null)
+            {
+                pictureBox.Image = Image.FromFile(fileDialog.FileName); 
+            }
+        }
+
+
     }
 }

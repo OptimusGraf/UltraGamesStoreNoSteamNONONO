@@ -15,7 +15,7 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         // уведомления; отзывы; исключения; асинхи; фильтрация; даты выхода и изображения; если база данных меняется, то нужно чтобы прога видела эти обнволения;
         // если игра есть в корзине (или другом списке) сделать чтобы кнопка менялась, если при добавлении игры мощности недостаточно, уведомить пользователя об этом;
-        // если при покупке не получается купить (возвраст), уведомить
+        // если при покупке не получается купить (возраст или нет денег), уведомить
         // в сингин контрол разобраться с искл, так же добавить возможность с окна регестрации вернуться назад на окно авторизации
         // КАРТИНКИ
         // списки игр можно попробовать сделать через generic 
@@ -49,6 +49,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 moneytoolStripMenuItem.Text = "Cчет: " + market.UsersMoney.ToString();
                 userToolStripMenuItem.Text = market.GetInfoAboutUser().UserName;
                 market.ChangedUI += () => moneytoolStripMenuItem.Text = "Cчет: " + market.UsersMoney.ToString();
+                market.ChangedUI += () => userToolStripMenuItem.Text = market.GetInfoAboutUser().UserName; ;
             }
 
         }
@@ -74,8 +75,8 @@ namespace UltraGamesStoreNoSteamNONONO
             else
             {
                 MessageBox.Show("Вы успешно вошли в аккаунт");
-                return true;
                 this.Show();
+                return true;
             }
         }
 

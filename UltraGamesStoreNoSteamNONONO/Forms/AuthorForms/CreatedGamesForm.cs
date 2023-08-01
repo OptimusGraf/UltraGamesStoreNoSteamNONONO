@@ -19,13 +19,6 @@ namespace UltraGamesStoreNoSteamNONONO.Forms
             this.market = market;
         }
 
-        private void CreatedGamesForm_Load(object sender, EventArgs e)
-        {
-            List<Game> games = market.GetUserCreatedGames();
-            foreach (Game game in games)
-            {
-                ListViewItem item = new ListViewItem();
-            }
-        }
+      
     }
 }

@@ -32,7 +32,7 @@
             label3 = new Label();
             label4 = new Label();
             pictureBox1 = new PictureBox();
-            button1 = new Button();
+            buttonImage = new Button();
             buttonSave = new Button();
             numericUpDownAge = new NumericUpDown();
             numericUpDownPower = new NumericUpDown();
@@ -83,16 +83,17 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
-            // button1
+            // buttonImage
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(223, 40);
-            button1.Name = "button1";
-            button1.Size = new Size(96, 72);
-            button1.TabIndex = 9;
-            button1.Text = "Поменять аватарку";
-            button1.UseVisualStyleBackColor = true;
+            buttonImage.Anchor = AnchorStyles.None;
+            buttonImage.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonImage.Location = new Point(223, 40);
+            buttonImage.Name = "buttonImage";
+            buttonImage.Size = new Size(96, 72);
+            buttonImage.TabIndex = 9;
+            buttonImage.Text = "Поменять аватарку";
+            buttonImage.UseVisualStyleBackColor = true;
+            buttonImage.Click += buttonImage_Click;
             // 
             // buttonSave
             // 
@@ -129,7 +130,7 @@
             Controls.Add(numericUpDownPower);
             Controls.Add(numericUpDownAge);
             Controls.Add(buttonSave);
-            Controls.Add(button1);
+            Controls.Add(buttonImage);
             Controls.Add(pictureBox1);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -150,7 +151,7 @@
         private Label label3;
         private Label label4;
         private PictureBox pictureBox1;
-        private Button button1;
+        private Button buttonImage;
         private Button button2;
         private Button button3;
         private Button buttonSave;

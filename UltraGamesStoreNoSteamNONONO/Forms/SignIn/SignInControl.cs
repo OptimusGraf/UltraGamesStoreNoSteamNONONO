@@ -22,15 +22,15 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+           // try
             {
                 market.SignIn(textBox1.Text, textBox2.Text);
                 ParentForm.DialogResult = DialogResult.OK;
                 ParentForm.Close();
             }
-            catch (Exception ex)
+           // catch (Exception ex)
             {
-                MessageBox.Show("Неверный логин или пароль");
+          //      MessageBox.Show("Неверный логин или пароль");
             }
         }
 

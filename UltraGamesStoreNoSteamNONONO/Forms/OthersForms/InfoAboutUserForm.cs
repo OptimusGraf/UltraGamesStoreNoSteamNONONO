@@ -33,5 +33,16 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             market.SetInfoAboutUser(Convert.ToInt32(numericUpDownAge.Value), Convert.ToInt32(numericUpDownPower.Value), pictureBox1.Image);
         }
+
+        private void buttonImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.ShowDialog();
+            if (dialog.FileName!=null)
+            {
+                pictureBox1.Image = Image.FromFile(dialog.FileName); 
+            }
+
+        }
     }
 }
