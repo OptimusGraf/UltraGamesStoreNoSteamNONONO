@@ -18,17 +18,17 @@ namespace UltraGamesStoreNoSteamNONONO
         int powerOfPC;
         public int PowerOfPC { get => powerOfPC;  }
 
-        Image image;
-        public Image Image { get => image;  }
+        byte[] image;
+        public byte[] Image { get => image;  }
 
-        public UserInfo(string name, int age, int powerOfPC, Image image )
+        public UserInfo(string name, int age, int powerOfPC, byte[] image )
         {
             this.userName = name;
             this.age = age;
             this.powerOfPC = powerOfPC;
             this.image = image;
         }
-        public UserInfo( int age, int powerOfPC, Image image)
+        public UserInfo( int age, int powerOfPC, byte[] image)
         {
             this.age = age;
             this.powerOfPC = powerOfPC;

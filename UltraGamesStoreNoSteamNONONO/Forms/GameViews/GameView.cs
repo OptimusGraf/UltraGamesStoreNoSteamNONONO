@@ -9,29 +9,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public partial class GameView : UserControl
+    public partial class GameView : UserControl, IView
     {
         protected Button Button1 { get => button1; }
         protected Button Button2 { get => button2; }
-        public Game Game { get => game;  }
+        public Game Game { get => game; }
 
         protected Game game;
 
 
-        protected IMarket market;
+        public IMarket Market { get; set; }
+        public void UpdateView()
+        {
+            labelName.Text = game.Name;
+            labelAuthor.Text = game.Author;
+            pictureBox1.Image = game.Icon.FromByteArrayToImage();
+            MakeButtons(game, Market);
+        }
         public GameView(Game game, IMarket market)
         {
             this.game = game;
-            this.market = market;
-            InitializeComponent();
-            labelName.Text = game.Name;
-            labelAuthor.Text = game.Author;
-            pictureBox1.Image = game.Icon;
+            market.ChangedUI += UpdateView;
+            this.Market = market;
             this.Dock = DockStyle.Fill;
-            MakeButtons(game, market);
+            InitializeComponent();
+            UpdateView();
         }
 
         protected virtual void MakeButtons(Game game, IMarket market)
@@ -60,7 +66,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 {
                     button2.Enabled = true;
                     button2.Click += Button2_ClickAdd;
-                } 
+                }
             }
             else
             {
@@ -76,22 +82,22 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void Button2_ClickAdd(object? sender, EventArgs e)
         {
-            market.AddToWantedList(game);     
+            Market.AddToWantedList(game);
         }
 
         private void Button2_ClickRemove(object? sender, EventArgs e)
         {
-            market.RemoveFromWantedList(game);
+            Market.RemoveFromWantedList(game);
         }
 
         private void Button1_ClickRemove(object? sender, EventArgs e)
         {
-            market.RemoveFromBasketList(game);
+            Market.RemoveFromBasketList(game);
         }
 
         protected virtual void button1_ClickAdd(object sender, EventArgs e)
         {
-            market.AddToBasketList(game);
+            Market.AddToBasketList(game);
 
         }
 

@@ -19,7 +19,7 @@ namespace UltraGamesStoreNoSteamNONONO
             return byteImage;
         }
 
-        static public Image FromByteArrayToImage(byte[] bytes)
+        static public Image FromByteArrayToImage(this byte[] bytes)
         {
             Image image = null;
             if (bytes != null && bytes.Length != 0)
@@ -27,12 +27,22 @@ namespace UltraGamesStoreNoSteamNONONO
                 using (MemoryStream mStream = new MemoryStream(bytes))
                 {
                     image = Image.FromStream(mStream);
+                    
                 }
             }
             
             return image;
-            
 
+        }
+        public static byte[] GetPictureFromDialog( )
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            byte[] image = null;
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                image = File.ReadAllBytes(fileDialog.FileName);
+            }
+            return image;
         }
     }
 }

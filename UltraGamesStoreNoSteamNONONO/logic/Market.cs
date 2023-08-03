@@ -142,7 +142,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         }
 
-        public void SetInfoAboutUser(  int age, int powerOfPc, Image image)
+        public void SetInfoAboutUser(  int age, int powerOfPc, byte[] image)
         {
             currentUser.UserInfo = new UserInfo( age, powerOfPc, image);
             ChangedUI?.Invoke();
@@ -153,13 +153,9 @@ namespace UltraGamesStoreNoSteamNONONO
             return currentUser.UserInfo;
         }
 
-        public void ChangeInfoAboutGame(Game game,Image image, Image icon, decimal price, int age, int power)
+        public void ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power)
         {
-            game.ImageOfGame = image;
-            game.Icon = icon;
-            game.Money = price;
-            game.RecAge = age;
-            game.PowerOfPc = power;
+           game.ChangeInfoAboutGame(image, icon, price, age, power);
             ChangedUI?.Invoke();
         }
 

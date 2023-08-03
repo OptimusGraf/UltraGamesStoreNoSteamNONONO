@@ -10,23 +10,27 @@ using System.Windows.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    public partial class GameTabControl : UserControl
+    public partial class GameTabControl : UserControl,IView
     {
         protected Game game;
-        protected IMarket market;
+        public IMarket Market { get; set; }
         GameView gameView;
         public GameTabControl(GameView gameView, IMarket market, Game game)
         {
-            this.market = market;
+            this.Market = market;
             this.game = game;
             this.gameView = gameView;
             gameView.Enabled = false;
 
             InitializeComponent();
+            panelForGameView.Controls.Add(gameView);
+            UpdateView();
+        }
+        public void UpdateView()
+        {
             labelAge.Text += game.RecAge;
             labelPower.Text += game.PowerOfPc;
-            pictureBoxForMainImage.Image = game.ImageOfGame;
-            panelForGameView.Controls.Add(gameView);
+            pictureBoxForMainImage.Image = game.ImageOfGame.FromByteArrayToImage();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -43,5 +47,6 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             Parent.Controls.Remove(this);
         }
+      
     }
 }

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            pictureBoxImage = new PictureBox();
+            pictureBoxIcon = new PictureBox();
             labelName = new Label();
             labelPrice = new Label();
             labelRate = new Label();
@@ -43,29 +43,29 @@
             numericUpDownPrice = new NumericUpDown();
             numericUpDownAge = new NumericUpDown();
             numericUpDownPower = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // pictureBoxImage
             // 
-            pictureBox1.Dock = DockStyle.Top;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(703, 143);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pictureBoxImage.Dock = DockStyle.Top;
+            pictureBoxImage.Location = new Point(0, 0);
+            pictureBoxImage.Name = "pictureBoxImage";
+            pictureBoxImage.Size = new Size(703, 143);
+            pictureBoxImage.TabIndex = 0;
+            pictureBoxImage.TabStop = false;
             // 
-            // pictureBox2
+            // pictureBoxIcon
             // 
-            pictureBox2.Location = new Point(12, 149);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(120, 99);
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
+            pictureBoxIcon.Location = new Point(12, 149);
+            pictureBoxIcon.Name = "pictureBoxIcon";
+            pictureBoxIcon.Size = new Size(120, 99);
+            pictureBoxIcon.TabIndex = 1;
+            pictureBoxIcon.TabStop = false;
             // 
             // labelName
             // 
@@ -214,13 +214,13 @@
             Controls.Add(labelRate);
             Controls.Add(labelPrice);
             Controls.Add(labelName);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
+            Controls.Add(pictureBoxIcon);
+            Controls.Add(pictureBoxImage);
             Name = "AuthorGameForm";
             Text = "AuthorGameForm";
             Load += AuthorGameForm_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).EndInit();
@@ -230,8 +230,8 @@
 
         #endregion
 
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox pictureBoxImage;
+        private PictureBox pictureBoxIcon;
         private Label labelName;
         private Label labelPrice;
         private Label labelRate;

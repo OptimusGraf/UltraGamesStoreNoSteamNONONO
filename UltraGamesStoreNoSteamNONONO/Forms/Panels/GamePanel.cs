@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UltraGamesStoreNoSteamNONONO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -13,6 +14,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public GamePanel(IMarket market)
         {
             Market = market;
+            market.ChangedUI += this.UpdateView;
             Dock = DockStyle.Fill;
             flowLayoutPanel = new FlowLayoutPanel();
             flowLayoutPanel.Dock = DockStyle.Fill;
@@ -48,6 +50,6 @@ namespace UltraGamesStoreNoSteamNONONO
             flowLayoutPanel.Visible = false;
             this.Controls.Add(new GameTabControl(view, Market, game));
         }
-    
+     
     }
 }

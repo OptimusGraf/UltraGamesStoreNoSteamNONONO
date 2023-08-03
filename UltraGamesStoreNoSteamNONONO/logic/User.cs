@@ -16,7 +16,7 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         // списки игр можно попробовать сделать через generic 
         public User(DataRow row, SQLBase sqlBase) : 
-            this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], Helper.FromByteArrayToImage(row["image"] as byte[]), (decimal)row["moneyOfuser"])
+            this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], row["image"] as byte[], (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
             basket = new ListOfGames(sqlBase, id, "UsersListBasket");
@@ -27,7 +27,7 @@ namespace UltraGamesStoreNoSteamNONONO
             //ДОБАВИТЬ КАРТИНКИ;
         }
 
-        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPc, Image image, decimal money)
+        private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPc, byte[] image, decimal money)
         {
             this.sqlBase = sqlBase;
             this.id = id;
@@ -45,8 +45,8 @@ namespace UltraGamesStoreNoSteamNONONO
         public int Age { get => age; }
         int powerOfPc;
         public int PowerOfPc { get => powerOfPc; }
-        Image image;
-        public Image Image { get => image; }
+        byte[] image;
+        public byte[] Image { get => image; }
         public decimal Money { get => money; set { money = value; UpdateInfoAboutUser(); } }
         public UserInfo UserInfo
         {
@@ -133,7 +133,7 @@ namespace UltraGamesStoreNoSteamNONONO
             Tuple<string, object>[] parameters
                 = {
                 new Tuple<string, object>("id", id),
-                new Tuple<string, object>("newImage", image.FromImageToByteArray()),
+                new Tuple<string, object>("newImage", image),
                 new Tuple<string, object>("newPower", powerOfPc),
                 new Tuple<string, object>("age", age),
                 new Tuple<string, object>("money", money)

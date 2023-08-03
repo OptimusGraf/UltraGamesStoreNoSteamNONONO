@@ -31,9 +31,9 @@ namespace UltraGamesStoreNoSteamNONONO
         public bool WantedContainGames(Game game);
         public bool AvaibaleContainGames(Game game);
         public decimal UsersMoney { get; set; }
-        public void SetInfoAboutUser(  int age, int powerOfPc, Image image);
+        public void SetInfoAboutUser(  int age, int powerOfPc, byte[] image);
         public UserInfo GetInfoAboutUser();
 
-        public void ChangeInfoAboutGame(Game game, Image image, Image icon, decimal price, int age, int power);
+        public void ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power);
     }
 }

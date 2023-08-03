@@ -57,7 +57,6 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void AddViewOnPanel(IView userPanel, Panel panel)
         {
-            market.ChangedUI += userPanel.UpdateView;
             panel?.Controls.Add(userPanel as Control);
         }
 
