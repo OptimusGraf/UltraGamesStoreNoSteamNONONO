@@ -104,6 +104,7 @@
             CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
             CreateToolStripMenuItem.Size = new Size(180, 22);
             CreateToolStripMenuItem.Text = "Создать игру";
+            CreateToolStripMenuItem.Click += CreateToolStripMenuItem_Click;
             // 
             // CreatedToolStripMenuItem
             // 
@@ -237,7 +238,7 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
-            // Form2
+            // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -246,7 +247,7 @@
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
-            Name = "Form2";
+            Name = "MainForm";
             Text = "Form2";
             Load += Form2_Load;
             menuStrip1.ResumeLayout(false);

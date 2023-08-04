@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UltraGamesStoreNoSteamNONONO.Forms;
+using UltraGamesStoreNoSteamNONONO;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -30,7 +30,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         protected override void Click(GameView view, Game game)
         {
-            AuthorGameForm form = new AuthorGameForm(Market, game);
+            ChangeGameForm form = new ChangeGameForm(Market, game);
             form.ShowDialog();
         }
 

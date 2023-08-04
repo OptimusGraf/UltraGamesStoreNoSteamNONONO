@@ -24,7 +24,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public void RemoveFromWantedList(Game game);
 
         public void BuyGames();
-        public void CreateGame(string nameOfGame, int money, int rate, int recAge, DateOnly date, int powerOfPc, string author, SQLBase sqlBase);
+        public void CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase);
         public event Action ChangedUI;
 
         public bool BassketContainGames(Game game);

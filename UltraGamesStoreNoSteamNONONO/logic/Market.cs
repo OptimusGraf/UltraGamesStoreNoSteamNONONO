@@ -67,9 +67,10 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        public void CreateGame(string nameOfGame, int money, int rate, int recAge, DateOnly date, int powerOfPc, string author, SQLBase sqlBase)
+        public void CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
-            Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, sqlBase);
+            //тут надо добавить обработку исключений и так же возврат получилось или нет
+            Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image,icon, sqlBase);
             ChangedUI?.Invoke();
         }
 

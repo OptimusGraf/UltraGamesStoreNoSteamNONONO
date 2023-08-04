@@ -1,4 +1,4 @@
-﻿namespace UltraGamesStoreNoSteamNONONO.Forms
+﻿namespace UltraGamesStoreNoSteamNONONO
 {
     partial class AuthorGameForm
     {
@@ -28,44 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBoxImage = new PictureBox();
-            pictureBoxIcon = new PictureBox();
             labelName = new Label();
             labelPrice = new Label();
-            labelRate = new Label();
-            labelRealese = new Label();
             labelAge = new Label();
             labelPowerOfPc = new Label();
             buttonImage = new Button();
             buttonIcon = new Button();
             buttonSave = new Button();
-            buttonReviews = new Button();
             numericUpDownPrice = new NumericUpDown();
             numericUpDownAge = new NumericUpDown();
             numericUpDownPower = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxImage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).BeginInit();
+            myPictureBoxImage = new MyPictureBox();
+            myPictureBoxIcon = new MyPictureBox();
+            flowLayoutPanelForInfo = new FlowLayoutPanel();
+            textBoxName = new TextBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBoxImage).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBoxIcon).BeginInit();
             SuspendLayout();
-            // 
-            // pictureBoxImage
-            // 
-            pictureBoxImage.Dock = DockStyle.Top;
-            pictureBoxImage.Location = new Point(0, 0);
-            pictureBoxImage.Name = "pictureBoxImage";
-            pictureBoxImage.Size = new Size(703, 143);
-            pictureBoxImage.TabIndex = 0;
-            pictureBoxImage.TabStop = false;
-            // 
-            // pictureBoxIcon
-            // 
-            pictureBoxIcon.Location = new Point(12, 149);
-            pictureBoxIcon.Name = "pictureBoxIcon";
-            pictureBoxIcon.Size = new Size(120, 99);
-            pictureBoxIcon.TabIndex = 1;
-            pictureBoxIcon.TabStop = false;
             // 
             // labelName
             // 
@@ -86,26 +68,6 @@
             labelPrice.Size = new Size(54, 21);
             labelPrice.TabIndex = 3;
             labelPrice.Text = "Цена: ";
-            // 
-            // labelRate
-            // 
-            labelRate.AutoSize = true;
-            labelRate.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelRate.Location = new Point(506, 173);
-            labelRate.Name = "labelRate";
-            labelRate.Size = new Size(74, 21);
-            labelRate.TabIndex = 4;
-            labelRate.Text = "Рейтинг: ";
-            // 
-            // labelRealese
-            // 
-            labelRealese.AutoSize = true;
-            labelRealese.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            labelRealese.Location = new Point(506, 220);
-            labelRealese.Name = "labelRealese";
-            labelRealese.Size = new Size(63, 21);
-            labelRealese.TabIndex = 5;
-            labelRealese.Text = "Realese";
             // 
             // labelAge
             // 
@@ -156,19 +118,9 @@
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(227, 43);
             buttonSave.TabIndex = 10;
-            buttonSave.Text = "Сохранить изменения";
+            buttonSave.Text = "Сохранить";
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
-            // 
-            // buttonReviews
-            // 
-            buttonReviews.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonReviews.Location = new Point(464, 442);
-            buttonReviews.Name = "buttonReviews";
-            buttonReviews.Size = new Size(227, 43);
-            buttonReviews.TabIndex = 11;
-            buttonReviews.Text = "Отзывы";
-            buttonReviews.UseVisualStyleBackColor = true;
             // 
             // numericUpDownPrice
             // 
@@ -195,55 +147,86 @@
             numericUpDownPower.Size = new Size(133, 29);
             numericUpDownPower.TabIndex = 18;
             // 
+            // myPictureBoxImage
+            // 
+            myPictureBoxImage.Dock = DockStyle.Top;
+            myPictureBoxImage.Image = null;
+            myPictureBoxImage.Location = new Point(0, 0);
+            myPictureBoxImage.Name = "myPictureBoxImage";
+            myPictureBoxImage.Size = new Size(703, 143);
+            myPictureBoxImage.TabIndex = 19;
+            myPictureBoxImage.TabStop = false;
+            // 
+            // myPictureBoxIcon
+            // 
+            myPictureBoxIcon.Anchor = AnchorStyles.None;
+            myPictureBoxIcon.Image = null;
+            myPictureBoxIcon.Location = new Point(11, 158);
+            myPictureBoxIcon.Name = "myPictureBoxIcon";
+            myPictureBoxIcon.Size = new Size(110, 90);
+            myPictureBoxIcon.TabIndex = 20;
+            myPictureBoxIcon.TabStop = false;
+            // 
+            // flowLayoutPanelForInfo
+            // 
+            flowLayoutPanelForInfo.Location = new Point(464, 158);
+            flowLayoutPanelForInfo.Name = "flowLayoutPanelForInfo";
+            flowLayoutPanelForInfo.Size = new Size(200, 90);
+            flowLayoutPanelForInfo.TabIndex = 21;
+            // 
+            // textBoxName
+            // 
+            textBoxName.Location = new Point(106, 279);
+            textBoxName.Name = "textBoxName";
+            textBoxName.Size = new Size(133, 23);
+            textBoxName.TabIndex = 22;
+            // 
             // AuthorGameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(703, 504);
+            Controls.Add(textBoxName);
+            Controls.Add(flowLayoutPanelForInfo);
+            Controls.Add(myPictureBoxIcon);
+            Controls.Add(myPictureBoxImage);
             Controls.Add(numericUpDownPower);
             Controls.Add(numericUpDownAge);
             Controls.Add(numericUpDownPrice);
-            Controls.Add(buttonReviews);
             Controls.Add(buttonSave);
             Controls.Add(buttonIcon);
             Controls.Add(buttonImage);
             Controls.Add(labelPowerOfPc);
             Controls.Add(labelAge);
-            Controls.Add(labelRealese);
-            Controls.Add(labelRate);
             Controls.Add(labelPrice);
             Controls.Add(labelName);
-            Controls.Add(pictureBoxIcon);
-            Controls.Add(pictureBoxImage);
             Name = "AuthorGameForm";
             Text = "AuthorGameForm";
             Load += AuthorGameForm_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBoxImage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxIcon).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).EndInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBoxImage).EndInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBoxIcon).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private PictureBox pictureBoxImage;
-        private PictureBox pictureBoxIcon;
-        private Label labelName;
-        private Label labelPrice;
-        private Label labelRate;
-        private Label labelRealese;
-        private Label labelAge;
-        private Label labelPowerOfPc;
-        private Button buttonImage;
-        private Button buttonIcon;
-        private Button buttonSave;
-        private Button buttonReviews;
-        private NumericUpDown numericUpDownPrice;
-        private NumericUpDown numericUpDownAge;
-        private NumericUpDown numericUpDownPower;
+        protected Label labelName;
+        protected Label labelPrice;
+        protected Label labelAge;
+        protected Label labelPowerOfPc;
+        protected Button buttonImage;
+        protected Button buttonIcon;
+        protected Button buttonSave;
+        protected NumericUpDown numericUpDownPrice;
+        protected NumericUpDown numericUpDownAge;
+        protected NumericUpDown numericUpDownPower;
+        protected MyPictureBox myPictureBoxImage;
+        protected MyPictureBox myPictureBoxIcon;
+        protected FlowLayoutPanel flowLayoutPanelForInfo;
+        protected TextBox textBoxName;
     }
 }

@@ -12,7 +12,7 @@ namespace UltraGamesStoreNoSteamNONONO
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
 
-        static public Game newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, SQLBase sqlBase)
+        static public Game newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
             //картинки потом
             //сюда тоже исключения
@@ -23,17 +23,19 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("price", money),
                 new Tuple<string, object>("rate",rate),
                 new Tuple<string, object>("recAge",recAge),
-                new Tuple<string, object>("date",date),
+            //    new Tuple<string, object>("date",date),
                 new Tuple<string, object>("author",author),
+                new Tuple<string, object>("image",image),
+                new Tuple<string, object>("icon",icon),
                 new Tuple<string,object> ("powerOfPC", powerOfPc)};
 
-            string query = "INSERT Games VALUES(@name, @price,@rate,@recAge,@date,@author,@powerOfPC, null,null)";
+            string query = "INSERT Games VALUES(@name, @price,@rate,@recAge ,null ,@author,@powerOfPC, @icon,@image)";
             sqlBase.NoResultQuery(query, parametrs);
 
             query = "SELECT id FROM Games WHERE nameOfGame = @name";
             int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
 
-            Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, null, money, null, sqlBase);
+            Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, icon, money, image, sqlBase);
             return game;
         }
         protected Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge, byte[] icon, decimal money, byte[] imageOfGame, SQLBase sqlBase)

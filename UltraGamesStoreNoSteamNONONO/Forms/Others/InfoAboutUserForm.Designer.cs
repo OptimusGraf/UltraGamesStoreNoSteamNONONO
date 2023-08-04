@@ -31,14 +31,14 @@
             label1 = new Label();
             label3 = new Label();
             label4 = new Label();
-            pictureBox1 = new PictureBox();
             buttonImage = new Button();
             buttonSave = new Button();
             numericUpDownAge = new NumericUpDown();
             numericUpDownPower = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            myPictureBox1 = new MyPictureBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -73,15 +73,6 @@
             label4.Size = new Size(171, 21);
             label4.TabIndex = 3;
             label4.Text = "Мощность комьютера";
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Anchor = AnchorStyles.None;
-            pictureBox1.Location = new Point(74, 11);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(127, 101);
-            pictureBox1.TabIndex = 4;
-            pictureBox1.TabStop = false;
             // 
             // buttonImage
             // 
@@ -121,26 +112,35 @@
             numericUpDownPower.Size = new Size(120, 23);
             numericUpDownPower.TabIndex = 14;
             // 
+            // myPictureBox1
+            // 
+            myPictureBox1.Image = null;
+            myPictureBox1.Location = new Point(56, 31);
+            myPictureBox1.Name = "myPictureBox1";
+            myPictureBox1.Size = new Size(145, 91);
+            myPictureBox1.TabIndex = 15;
+            myPictureBox1.TabStop = false;
+            // 
             // InfoAboutUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(363, 367);
+            Controls.Add(myPictureBox1);
             Controls.Add(numericUpDownPower);
             Controls.Add(numericUpDownAge);
             Controls.Add(buttonSave);
             Controls.Add(buttonImage);
-            Controls.Add(pictureBox1);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label1);
             Name = "InfoAboutUserForm";
             Text = "InfoAboutUserForm";
             Load += InfoAboutUserForm_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).EndInit();
+            ((System.ComponentModel.ISupportInitialize)myPictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -150,12 +150,12 @@
         private Label label1;
         private Label label3;
         private Label label4;
-        private PictureBox pictureBox1;
         private Button buttonImage;
         private Button button2;
         private Button button3;
         private Button buttonSave;
         private NumericUpDown numericUpDownAge;
         private NumericUpDown numericUpDownPower;
+        private MyPictureBox myPictureBox1;
     }
 }
