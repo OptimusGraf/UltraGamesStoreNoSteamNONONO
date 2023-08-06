@@ -12,20 +12,20 @@ namespace UltraGamesStoreNoSteamNONONO
         {
            
         }
-        protected override void MakeButtons(Game game, IMarket market)
+        protected override void MakeButtons()
         {
-            Button1.Click += button1_Click;
-            Button2.Click += button2_Click;
-            Button1.Text = "Играть";
+            button1.Click += button1_Click;
+            button2.Click += button2_Click;
+            button1.Text = "Играть";
             if (((UserGame)game).IsLoaded == true)
             {
-                Button1.Enabled = true;
-                Button2.Text = "Удалить";
+                button1.Enabled = true;
+                button2.Text = "Удалить";
             }
             else
             {
-                Button1.Enabled = false;
-                Button2.Text = "Скачать";
+                button1.Enabled = false;
+                button2.Text = "Скачать";
             }
         }
         protected  void button1_Click(object sender, EventArgs e)
@@ -39,13 +39,13 @@ namespace UltraGamesStoreNoSteamNONONO
             ((UserGame)game).IsLoaded = !((UserGame)game).IsLoaded;
             if (((UserGame)game).IsLoaded)
             {
-                Button1.Enabled = true;
-                Button2.Text = "Удалить";
+                button1.Enabled = true;
+                button2.Text = "Удалить";
             }
             else
             {
-                Button1.Enabled = false;
-                Button2.Text = "Скачать";
+                button1.Enabled = false;
+                button2.Text = "Скачать";
             }
         }
     }

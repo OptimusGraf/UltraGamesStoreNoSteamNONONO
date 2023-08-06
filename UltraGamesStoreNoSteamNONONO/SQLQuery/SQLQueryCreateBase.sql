@@ -19,7 +19,7 @@ CREATE TABLE Users
 CREATE TABLE Games
 (
 	id INT IDENTITY  PRIMARY KEY,
-	nameOfGame nvarchar(20) UNIQUE,
+	nameOfGame NVARCHAR(20) UNIQUE,
 	price MONEY,
 	rate int,
 	recAge int,
@@ -29,7 +29,7 @@ CREATE TABLE Games
 	icon VARBINARY(MAX),
 	imageOfGame VARBINARY(MAX)
 )
-
+GO
 CREATE TABLE UsersListOfGames
 (
 	id INT IDENTITY  PRIMARY KEY,
@@ -54,6 +54,16 @@ CREATE TABLE UsersListBasket
 	GamesId INT REFERENCES Games(Id),
 	UNIQUE(UserId, GamesId)
 )
+CREATE TABLE Reviews
+(
+	id INT IDENTITY PRIMARY KEY,
+	UserName NVARCHAR(20) REFERENCES Users(username),
+	GamesId INT REFERENCES Games(Id),
+	UNIQUE(UserName, GamesId),
+	textOfReview NVARCHAR(MAX),
+	authorComment NVARCHAR(MAX) DEFAULT (null)
+
+)
 GO
 INSERT Users (username,pasword,moneyOfUser,age,PowerOfPC) VALUES
 ('Optimus','prime',1000000, 20 ,60),
@@ -70,4 +80,7 @@ INSERT Games (nameOfGame,price,rate,recAge,release,author,powerOfPc) VALUES
 GO
 INSERT UsersListOfGames VALUES
 (1,1,0,0,0)
+INSERT Reviews (UserName,GamesId, textOfReview ) VALUES
+('xelcon', 1, 'Фигня, не запускается'),
+('Fosker', 1, 'Согласен с предыдущем оратором, не запускается')
 USE master;

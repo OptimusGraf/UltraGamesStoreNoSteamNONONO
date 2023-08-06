@@ -18,13 +18,13 @@ namespace UltraGamesStoreNoSteamNONONO
         public HashSet<Game> GetWantedList();
         public HashSet<Game> GetUsersListOfGames();
         public List<Game> GetUserCreatedGames();
-        public void AddToBasketList(Game game);
+        public string AddToBasketList(Game game);
         public void RemoveFromBasketList(Game game);
-        public void AddToWantedList(Game game);
+        public string AddToWantedList(Game game);
         public void RemoveFromWantedList(Game game);
 
-        public void BuyGames();
-        public void CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase);
+        public string BuyGames();
+        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase);
         public event Action ChangedUI;
 
         public bool BassketContainGames(Game game);
@@ -34,6 +34,6 @@ namespace UltraGamesStoreNoSteamNONONO
         public void SetInfoAboutUser(  int age, int powerOfPc, byte[] image);
         public UserInfo GetInfoAboutUser();
 
-        public void ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power);
+        public bool ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power);
     }
 }

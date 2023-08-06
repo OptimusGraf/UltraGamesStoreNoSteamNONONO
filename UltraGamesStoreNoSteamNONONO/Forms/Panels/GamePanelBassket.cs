@@ -10,12 +10,12 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         public GamePanelBassket(IMarket market) : base(market)
         {
-          
-            
+
+
         }
         public override void UpdateView()
         {
-            HashSet<Game> list=  Market.GetBasketList();
+            HashSet<Game> list = Market.GetBasketList();
             base.AddToFlowPanel(list);
             Button buttonBuy = new Button();
             buttonBuy.Text = "Купить";
@@ -27,7 +27,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void ButtonBuy_Click(object? sender, EventArgs e)
         {
-            Market.BuyGames();
+            string result = Market.BuyGames();
+            MessageBox.Show(result);
         }
     }
 }

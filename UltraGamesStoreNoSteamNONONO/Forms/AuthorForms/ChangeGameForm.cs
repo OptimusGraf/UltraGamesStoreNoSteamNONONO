@@ -13,7 +13,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public ChangeGameForm(IMarket market, Game game) : base(market)
         {
             this.game = game;
-            textBoxName.ReadOnly= true;
+            textBoxName.ReadOnly = true;
             labelRate = new Label();
             labelRealese = new Label();
             flowLayoutPanelForInfo.Controls.Add(labelRate);
@@ -33,10 +33,14 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         protected override void Save()
         {
-            Market.ChangeInfoAboutGame
-                (game, myPictureBoxImage.Image, myPictureBoxIcon.Image,
-                numericUpDownPrice.Value, Convert.ToInt32(numericUpDownAge.Value),
-                Convert.ToInt32(numericUpDownPower.Value));
+            bool result = Market.ChangeInfoAboutGame
+                 (game, myPictureBoxImage.Image, myPictureBoxIcon.Image,
+                 numericUpDownPrice.Value, Convert.ToInt32(numericUpDownAge.Value),
+                 Convert.ToInt32(numericUpDownPower.Value));
+            if (!result)
+            {
+                MessageBox.Show("ERROR");
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
             foreach (Game game in list)
             {
-                GameView gameView = new GameView(game, Market);
+                GameView gameView = new GameViewMarket(game, Market);
                 gameView.DoubleClick += GameView_Click;
                 
                 flowLayoutPanel.Controls.Add(gameView);

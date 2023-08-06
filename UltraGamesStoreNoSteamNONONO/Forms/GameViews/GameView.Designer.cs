@@ -76,7 +76,6 @@
             button1.TabIndex = 4;
             button1.Text = "В корзину";
             button1.UseVisualStyleBackColor = false;
-     
             // 
             // button2
             // 
@@ -88,7 +87,6 @@
             button2.TabIndex = 5;
             button2.Text = "В желаемое";
             button2.UseVisualStyleBackColor = false;
-
             // 
             // labelDate
             // 
@@ -123,10 +121,10 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Label labelName;
         private Label labelAuthor;
-        private Button button1;
-        private Button button2;
         private Label labelDate;
+        protected Button button1;
+        protected Button button2;
+        protected Label labelName;
     }
 }

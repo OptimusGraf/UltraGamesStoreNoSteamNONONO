@@ -1,10 +1,14 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Windows.Forms;
+using UltraGamesStoreNoSteamNONONO.SQLQuery;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     public class Game
     {
+        // sqlBase сделать статичным
+        // подумать об инкапсюляции 
 
         public Game(DataRow row, SQLBase sqlBase) :
             this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003, 7, 12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], (row["icon"] as byte[]), (decimal)row["price"], (row["imageOfGame"] as byte[]), sqlBase)
@@ -12,7 +16,7 @@ namespace UltraGamesStoreNoSteamNONONO
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
 
-        static public Game newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
+        static public void newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
             //картинки потом
             //сюда тоже исключения
@@ -32,11 +36,11 @@ namespace UltraGamesStoreNoSteamNONONO
             string query = "INSERT Games VALUES(@name, @price,@rate,@recAge ,null ,@author,@powerOfPC, @icon,@image)";
             sqlBase.NoResultQuery(query, parametrs);
 
-            query = "SELECT id FROM Games WHERE nameOfGame = @name";
-            int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
+            //query = "SELECT id FROM Games WHERE nameOfGame = @name";
+            //int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
 
-            Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, icon, money, image, sqlBase);
-            return game;
+            //Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, icon, money, image, sqlBase);
+            //return game;
         }
         protected Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge, byte[] icon, decimal money, byte[] imageOfGame, SQLBase sqlBase)
         {
@@ -112,6 +116,19 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             return list;
 
+        }
+         public List<Review> GetReviews( )
+        {
+            string query = "SELECT * FROM Reviews WHERE GamesId = @gameId";
+            Tuple<string, object>[] parameters = { new Tuple<string, object>("gameId", GameId) };
+
+            DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
+            List<Review> list = new List<Review>();
+            foreach (DataRow row in table.Rows)
+            {
+                list.Add(new Review(row, sqlBase));
+            }
+            return list;
         }
         static public event Action Changed;
 

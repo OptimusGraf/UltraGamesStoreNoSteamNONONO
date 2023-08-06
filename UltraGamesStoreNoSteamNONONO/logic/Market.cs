@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -28,62 +29,104 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public decimal UsersMoney { get => currentUser.Money; set { currentUser.Money = value; ChangedUI?.Invoke(); } }
 
-        public void AddToBasketList(Game game)
+        public string AddToBasketList(Game game)
         {
-                                                                                                                                                                                       
             CurrentUser.Basket.AddGame(game);
             ChangedUI?.Invoke();
+            return CheckAgeAndPower(game);
         }
 
-        public void AddToWantedList(Game game)
+        private string CheckAgeAndPower(Game game)
+        {
+            UserInfo userInfo = currentUser.UserInfo;
+            string result = "";
+            if (game.PowerOfPc > userInfo.PowerOfPC)
+            {
+                result += "Требуемая мощность игры выше вашей \n";
+            }
+            if (game.RecAge > userInfo.Age)
+            {
+                result += "Требуемый возвраст больше вашего, вы не сможете купить игру \n";
+            }
+            return result;
+
+        }
+
+        public string AddToWantedList(Game game)
         {
             CurrentUser.WantedGames.AddGame(game);
             ChangedUI?.Invoke();
+            return CheckAgeAndPower(game);
         }
 
-        public void BuyGames()
+        public string BuyGames()
         {
-
+            string result = "";
             decimal sum = 0;
-            int recAge = 0;
+            int recAge = -1;
+            string nameRecAge = "";
             foreach (var game in CurrentUser.Basket.Games)
             {
                 sum += game.Money;
-                recAge = Math.Max(recAge, game.RecAge);
-            }
 
-            if (CurrentUser.Money >= sum && CurrentUser.Age>= recAge)
-            {
-                CurrentUser.Money -= sum;
-                foreach (var game in CurrentUser.Basket.Games)
+                if (recAge < game.RecAge)
                 {
-                    //ИСКЛЮЧЕНИЯ
-                    CurrentUser.AvailableGames.AddGame(UserGame.NewUserGame(game,currentUser.id,sqlBase));
-                    currentUser.Basket.DeleteGame(game);
-                    currentUser.WantedGames.DeleteGame(game);
+                    recAge = game.RecAge;
+                    nameRecAge = game.Name;
                 }
             }
 
+            if (currentUser.Age < recAge)
+            {
+                return $"Вам нельзя играть в \"{nameRecAge}\", проверьте возрастные ограничения";
+            }
+            if (currentUser.Money < sum)
+            {
+                return "Денег недостаточно";
+
+            }
+
+            CurrentUser.Money -= sum;
+            foreach (var game in CurrentUser.Basket.Games)
+            {
+                //ИСКЛЮЧЕНИЯ
+                CurrentUser.AvailableGames.AddGame(UserGame.NewUserGame(game, currentUser.id, sqlBase));
+                currentUser.Basket.DeleteGame(game);
+                currentUser.WantedGames.DeleteGame(game);
+            }
+
             ChangedUI?.Invoke();
+            return "Успешно";
         }
 
-        public void CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
+        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
             //тут надо добавить обработку исключений и так же возврат получилось или нет
-            Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image,icon, sqlBase);
-            ChangedUI?.Invoke();
+            bool result;
+            try
+            {
+                Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image, icon, sqlBase);
+                result = true;
+                ChangedUI?.Invoke();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public HashSet<Game> GetBasketList()
         {
             return CurrentUser.Basket.Games;
         }
-     
+
         public List<Game> TopTenGamesFrom(int cursor = 0)
         {
-        return Game.GetTenGames(cursor, sqlBase);
+            return Game.GetTenGames(cursor, sqlBase);
         }
-   
+
         public HashSet<Game> GetUsersListOfGames()
         {
             return CurrentUser.AvailableGames.Games;
@@ -95,7 +138,7 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         public List<Game> GetUserCreatedGames()
         {
-            return currentUser.CreatedGames; 
+            return currentUser.CreatedGames;
         }
         public void RemoveFromBasketList(Game game)
         {
@@ -124,7 +167,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public void SignUp(string username, int age, string password, int powerOfPc)
         {
             //ИСКЛЮЧЕНИЯ
-           currentUser= User.NewUser(username, age, password, powerOfPc, sqlBase);
+            currentUser = User.NewUser(username, age, password, powerOfPc, sqlBase);
         }
 
         public bool BassketContainGames(Game game)
@@ -134,7 +177,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public bool WantedContainGames(Game game)
         {
-          return  currentUser.WantedGames.ContainGame(game);
+            return currentUser.WantedGames.ContainGame(game);
         }
 
         public bool AvaibaleContainGames(Game game)
@@ -143,9 +186,9 @@ namespace UltraGamesStoreNoSteamNONONO
 
         }
 
-        public void SetInfoAboutUser(  int age, int powerOfPc, byte[] image)
+        public void SetInfoAboutUser(int age, int powerOfPc, byte[] image)
         {
-            currentUser.UserInfo = new UserInfo( age, powerOfPc, image);
+            currentUser.UserInfo = new UserInfo(age, powerOfPc, image);
             ChangedUI?.Invoke();
         }
 
@@ -154,10 +197,22 @@ namespace UltraGamesStoreNoSteamNONONO
             return currentUser.UserInfo;
         }
 
-        public void ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power)
+        public bool ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power)
         {
-           game.ChangeInfoAboutGame(image, icon, price, age, power);
-            ChangedUI?.Invoke();
+            bool result;
+
+            try
+            {
+                game.ChangeInfoAboutGame(image, icon, price, age, power);
+                result = true;
+                ChangedUI?.Invoke();
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
     }

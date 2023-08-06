@@ -11,7 +11,7 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         public GamePanelAuthor(IMarket market) : base(market)
         {
-            
+
         }
         public override void UpdateView()
         {

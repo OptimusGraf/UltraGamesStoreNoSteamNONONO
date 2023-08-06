@@ -10,10 +10,14 @@ namespace UltraGamesStoreNoSteamNONONO
     {
         public GameViewAuthor(Game game, IMarket market) : base(game,market)
         {
-            this.Controls.Remove(Button1);
-            this.Controls.Remove(Button2);
+            this.Controls.Remove(button1);
+            this.Controls.Remove(button2);
             
         }
-        
+        protected override void MakeButtons()
+        {
+            
+        }
+
     }
 }
