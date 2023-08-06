@@ -1,5 +1,6 @@
 ﻿ using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +36,9 @@ namespace UltraGamesStoreNoSteamNONONO
         public UserInfo GetInfoAboutUser();
 
         public bool ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power);
+        public List<Review> GetReviews(Game game);
+        public void NewReview(Game game, string text);
+        public void AnwserReview(Review review, string text);
+     
     }
 }
