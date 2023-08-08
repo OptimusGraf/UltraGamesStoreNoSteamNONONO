@@ -1,7 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows.Forms;
-using UltraGamesStoreNoSteamNONONO.SQLQuery;
 
 namespace UltraGamesStoreNoSteamNONONO
 {

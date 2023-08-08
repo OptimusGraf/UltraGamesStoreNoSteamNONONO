@@ -37,7 +37,7 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public bool ChangeInfoAboutGame(Game game, byte[] image, byte[] icon, decimal price, int age, int power);
         public List<Review> GetReviews(Game game);
-        public void NewReview(Game game, string text);
+        public void NewReview(Game game, int grade, string text);
         public void AnwserReview(Review review, string text);
      
     }

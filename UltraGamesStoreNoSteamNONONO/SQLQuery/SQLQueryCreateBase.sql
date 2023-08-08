@@ -61,7 +61,8 @@ CREATE TABLE Reviews
 	GamesId INT REFERENCES Games(Id),
 	UNIQUE(UserName, GamesId),
 	textOfReview NVARCHAR(MAX),
-	authorComment NVARCHAR(MAX) DEFAULT (null)
+	authorComment NVARCHAR(MAX) DEFAULT (null),
+	grade INT
 
 )
 GO
@@ -80,7 +81,7 @@ INSERT Games (nameOfGame,price,rate,recAge,release,author,powerOfPc) VALUES
 GO
 INSERT UsersListOfGames VALUES
 (1,1,0,0,0)
-INSERT Reviews (UserName,GamesId, textOfReview ) VALUES
-('xelcon', 1, 'Фигня, не запускается'),
-('Fosker', 1, 'Согласен с предыдущем оратором, не запускается')
+INSERT Reviews (UserName,GamesId, textOfReview, grade ) VALUES
+('xelcon', 1, 'Фигня, не запускается',1),
+('Fosker', 1, 'Согласен с предыдущем оратором, не запускается',3)
 USE master;

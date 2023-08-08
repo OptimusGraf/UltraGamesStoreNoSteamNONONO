@@ -18,7 +18,20 @@ namespace UltraGamesStoreNoSteamNONONO
             labelRealese = new Label();
             flowLayoutPanelForInfo.Controls.Add(labelRate);
             flowLayoutPanelForInfo.Controls.Add(labelRealese);
+            Button button = new Button();
+            button.Dock = DockStyle.Fill;
+            button.Text = "Отзывы";
+            button.Font= new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            button.Click += Button_Click;
+            panelForButton.Controls.Add(button);
         }
+
+        private void Button_Click(object? sender, EventArgs e)
+        {
+            Form form = new AuthorReviewsForm(Market, game);
+            form.ShowDialog();
+        }
+
         public override void UpdateView()
         {
             myPictureBoxImage.Image = game.ImageOfGame;

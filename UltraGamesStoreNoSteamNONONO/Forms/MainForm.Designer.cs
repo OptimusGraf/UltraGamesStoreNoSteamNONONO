@@ -64,7 +64,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { userToolStripMenuItem, ExitToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(808, 24);
+            menuStrip1.Size = new Size(936, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -102,14 +102,14 @@
             // CreateToolStripMenuItem
             // 
             CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-            CreateToolStripMenuItem.Size = new Size(180, 22);
+            CreateToolStripMenuItem.Size = new Size(166, 22);
             CreateToolStripMenuItem.Text = "Создать игру";
             CreateToolStripMenuItem.Click += CreateToolStripMenuItem_Click;
             // 
             // CreatedToolStripMenuItem
             // 
             CreatedToolStripMenuItem.Name = "CreatedToolStripMenuItem";
-            CreatedToolStripMenuItem.Size = new Size(180, 22);
+            CreatedToolStripMenuItem.Size = new Size(166, 22);
             CreatedToolStripMenuItem.Text = "Созданные игры";
             CreatedToolStripMenuItem.Click += CreatedToolStripMenuItem_Click;
             // 
@@ -130,7 +130,7 @@
             tabControl1.Location = new Point(0, 24);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(808, 485);
+            tabControl1.Size = new Size(936, 835);
             tabControl1.TabIndex = 1;
             // 
             // tabPageMarket
@@ -141,7 +141,7 @@
             tabPageMarket.Location = new Point(4, 24);
             tabPageMarket.Name = "tabPageMarket";
             tabPageMarket.Padding = new Padding(3);
-            tabPageMarket.Size = new Size(800, 457);
+            tabPageMarket.Size = new Size(928, 807);
             tabPageMarket.TabIndex = 0;
             tabPageMarket.Text = "Магазин";
             // 
@@ -154,7 +154,7 @@
             tabControl2.Location = new Point(3, 3);
             tabControl2.Name = "tabControl2";
             tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(794, 451);
+            tabControl2.Size = new Size(922, 801);
             tabControl2.TabIndex = 0;
             // 
             // tabPageCatalog
@@ -163,7 +163,7 @@
             tabPageCatalog.Location = new Point(4, 24);
             tabPageCatalog.Name = "tabPageCatalog";
             tabPageCatalog.Padding = new Padding(3);
-            tabPageCatalog.Size = new Size(786, 423);
+            tabPageCatalog.Size = new Size(914, 773);
             tabPageCatalog.TabIndex = 0;
             tabPageCatalog.Text = "Каталог";
             tabPageCatalog.UseVisualStyleBackColor = true;
@@ -173,7 +173,7 @@
             marketPanel.Dock = DockStyle.Fill;
             marketPanel.Location = new Point(3, 3);
             marketPanel.Name = "marketPanel";
-            marketPanel.Size = new Size(780, 417);
+            marketPanel.Size = new Size(908, 767);
             marketPanel.TabIndex = 1;
             // 
             // tabPageWanted
@@ -182,7 +182,7 @@
             tabPageWanted.Location = new Point(4, 24);
             tabPageWanted.Name = "tabPageWanted";
             tabPageWanted.Padding = new Padding(3);
-            tabPageWanted.Size = new Size(786, 423);
+            tabPageWanted.Size = new Size(914, 609);
             tabPageWanted.TabIndex = 1;
             tabPageWanted.Text = "Список желаемоего";
             tabPageWanted.UseVisualStyleBackColor = true;
@@ -192,7 +192,7 @@
             panelWanted.Dock = DockStyle.Fill;
             panelWanted.Location = new Point(3, 3);
             panelWanted.Name = "panelWanted";
-            panelWanted.Size = new Size(780, 417);
+            panelWanted.Size = new Size(908, 603);
             panelWanted.TabIndex = 0;
             // 
             // tabPageBasket
@@ -201,7 +201,7 @@
             tabPageBasket.Location = new Point(4, 24);
             tabPageBasket.Name = "tabPageBasket";
             tabPageBasket.Padding = new Padding(3);
-            tabPageBasket.Size = new Size(786, 423);
+            tabPageBasket.Size = new Size(914, 609);
             tabPageBasket.TabIndex = 2;
             tabPageBasket.Text = "Корзина";
             tabPageBasket.UseVisualStyleBackColor = true;
@@ -211,7 +211,7 @@
             panelBassket.Dock = DockStyle.Fill;
             panelBassket.Location = new Point(3, 3);
             panelBassket.Name = "panelBassket";
-            panelBassket.Size = new Size(780, 417);
+            panelBassket.Size = new Size(908, 603);
             panelBassket.TabIndex = 0;
             // 
             // tabPageLibary
@@ -221,7 +221,7 @@
             tabPageLibary.Location = new Point(4, 24);
             tabPageLibary.Name = "tabPageLibary";
             tabPageLibary.Padding = new Padding(3);
-            tabPageLibary.Size = new Size(800, 457);
+            tabPageLibary.Size = new Size(928, 643);
             tabPageLibary.TabIndex = 1;
             tabPageLibary.Text = "Библиотека";
             // 
@@ -230,7 +230,7 @@
             panelLibary.Dock = DockStyle.Fill;
             panelLibary.Location = new Point(3, 3);
             panelLibary.Name = "panelLibary";
-            panelLibary.Size = new Size(794, 451);
+            panelLibary.Size = new Size(922, 637);
             panelLibary.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -243,7 +243,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
-            ClientSize = new Size(808, 509);
+            ClientSize = new Size(936, 859);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;

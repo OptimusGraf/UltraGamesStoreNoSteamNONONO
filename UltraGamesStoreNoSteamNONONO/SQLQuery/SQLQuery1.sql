@@ -1,3 +1,4 @@
 ﻿
 USE MyGameStore;
-SELECT * FROM Games
+DELETE Reviews WHERE UserName = 'Optimus';
+SELECT * FROM Reviews;

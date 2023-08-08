@@ -20,7 +20,7 @@ namespace UltraGamesStoreNoSteamNONONO
             InitializeComponent();
         }
 
-        public abstract void UpdateView();             
+        public abstract void UpdateView();
 
         private void AuthorGameForm_Load(object sender, EventArgs e)
         {

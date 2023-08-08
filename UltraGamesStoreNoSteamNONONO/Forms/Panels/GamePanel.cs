@@ -48,7 +48,9 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             flowLayoutPanel.Enabled = false;
             flowLayoutPanel.Visible = false;
-            this.Controls.Add(new GameTabControl(view, Market, game));
+            Control control = new GameTabControl(view, Market, game);
+            control.Dock = DockStyle.Fill;
+            this.Controls.Add(control);
         }
      
     }

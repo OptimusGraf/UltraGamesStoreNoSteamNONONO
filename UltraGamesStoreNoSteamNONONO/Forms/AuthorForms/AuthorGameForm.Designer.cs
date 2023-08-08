@@ -42,6 +42,7 @@
             myPictureBoxIcon = new MyPictureBox();
             flowLayoutPanelForInfo = new FlowLayoutPanel();
             textBoxName = new TextBox();
+            panelForButton = new Panel();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownAge).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPower).BeginInit();
@@ -181,12 +182,20 @@
             textBoxName.Size = new Size(133, 23);
             textBoxName.TabIndex = 22;
             // 
+            // panelForButton
+            // 
+            panelForButton.Location = new Point(464, 442);
+            panelForButton.Name = "panelForButton";
+            panelForButton.Size = new Size(211, 43);
+            panelForButton.TabIndex = 23;
+            // 
             // AuthorGameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(703, 504);
+            Controls.Add(panelForButton);
             Controls.Add(textBoxName);
             Controls.Add(flowLayoutPanelForInfo);
             Controls.Add(myPictureBoxIcon);
@@ -228,5 +237,6 @@
         protected MyPictureBox myPictureBoxIcon;
         protected FlowLayoutPanel flowLayoutPanelForInfo;
         protected TextBox textBoxName;
+        protected Panel panelForButton;
     }
 }

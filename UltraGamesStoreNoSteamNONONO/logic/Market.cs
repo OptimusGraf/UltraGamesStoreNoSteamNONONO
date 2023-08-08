@@ -9,7 +9,6 @@ using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using UltraGamesStoreNoSteamNONONO.SQLQuery;
 
 namespace UltraGamesStoreNoSteamNONONO
 {// асинки добавить, изменение инфомрации об  играх, передлать в бул
@@ -221,9 +220,9 @@ namespace UltraGamesStoreNoSteamNONONO
             return game.GetReviews();
         }
 
-        public void NewReview(Game game,string text)
+        public void NewReview(Game game,int grade,string text)
         {
-            Review.NewReview(game, CurrentUser.UserName, text, sqlBase);
+            Review.NewReview(game, CurrentUser.UserName,grade, text, sqlBase);
             ChangedUI?.Invoke();
         }
         public void AnwserReview(Review review,string text)
