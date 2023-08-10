@@ -34,6 +34,7 @@
             button1 = new Button();
             button2 = new Button();
             labelDate = new Label();
+            labelRate = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -98,6 +99,16 @@
             labelDate.TabIndex = 6;
             labelDate.Text = "label1";
             // 
+            // labelRate
+            // 
+            labelRate.AutoSize = true;
+            labelRate.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            labelRate.Location = new Point(513, 14);
+            labelRate.Name = "labelRate";
+            labelRate.Size = new Size(52, 21);
+            labelRate.TabIndex = 7;
+            labelRate.Text = "label1";
+            // 
             // GameView
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -105,6 +116,7 @@
             AutoSize = true;
             BackColor = SystemColors.GradientActiveCaption;
             BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(labelRate);
             Controls.Add(labelDate);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -126,5 +138,6 @@
         protected Button button1;
         protected Button button2;
         protected Label labelName;
+        private Label labelRate;
     }
 }

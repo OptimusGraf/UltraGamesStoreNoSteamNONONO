@@ -14,18 +14,12 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class MainForm : Form
     {
-        // даты выхода ;
-        // отзывы;
-        // сделать чтобы рейтинг вычислялся на основе отзывов 
-        // уведомления;
         // асинхи;
-        // фильтрация;
         // исключения;
         // в сингин контрол разобраться с искл, так же добавить возможность с окна регестрации вернуться назад на окно авторизации
-        // добавить на гаймвьюшку в магазине рейтинг
+        // фильтрация;
+
         // переделать AddtoflowPanel в gameviews
-        // списки игр можно попробовать сделать через generic 
-        // если база данных меняется, то нужно чтобы прога видела эти обнволения;
         // отзывы исключение когда один и тот же пользователь для одной игры
 
         IMarket market;
@@ -109,6 +103,12 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             Form createForm = new CreateGameForm(market);
             createForm.ShowDialog();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form form = new NotificationForm(market);
+            form.ShowDialog();
         }
     }
 

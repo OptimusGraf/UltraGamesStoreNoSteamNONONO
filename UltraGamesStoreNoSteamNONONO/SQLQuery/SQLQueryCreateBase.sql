@@ -65,6 +65,14 @@ CREATE TABLE Reviews
 	grade INT
 
 )
+CREATE TABLE Notifications
+(
+	id INT IDENTITY PRIMARY KEY, 
+	UserName NVARCHAR(20) REFERENCES Users(username),
+	text NVARCHAR(MAX)
+
+
+)
 GO
 INSERT Users (username,pasword,moneyOfUser,age,PowerOfPC) VALUES
 ('Optimus','prime',1000000, 20 ,60),

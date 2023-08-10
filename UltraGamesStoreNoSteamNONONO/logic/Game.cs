@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Data;
+using System.Text;
 using System.Windows.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
@@ -10,7 +11,7 @@ namespace UltraGamesStoreNoSteamNONONO
         // подумать об инкапсюляции 
 
         public Game(DataRow row, SQLBase sqlBase) :
-            this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], new DateOnly(2003, 7, 12), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], (row["icon"] as byte[]), (decimal)row["price"], (row["imageOfGame"] as byte[]), sqlBase)
+            this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], DateOnly.FromDateTime((DateTime)row["release"]), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], (row["icon"] as byte[]), (decimal)row["price"], (row["imageOfGame"] as byte[]), sqlBase)
         {
             // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
@@ -26,13 +27,13 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("price", money),
                 new Tuple<string, object>("rate",rate),
                 new Tuple<string, object>("recAge",recAge),
-            //    new Tuple<string, object>("date",date),
+                new Tuple<string, object>("date",date.ToString()),
                 new Tuple<string, object>("author",author),
                 new Tuple<string, object>("image",image),
                 new Tuple<string, object>("icon",icon),
                 new Tuple<string,object> ("powerOfPC", powerOfPc)};
 
-            string query = "INSERT Games VALUES(@name, @price,@rate,@recAge ,null ,@author,@powerOfPC, @icon,@image)";
+            string query = "INSERT Games VALUES(@name, @price,@rate,@recAge, @date,@author,@powerOfPC, @icon,@image)";
             sqlBase.NoResultQuery(query, parametrs);
 
             //query = "SELECT id FROM Games WHERE nameOfGame = @name";
@@ -60,10 +61,12 @@ namespace UltraGamesStoreNoSteamNONONO
         public int GameId => gameId;
 
         string name;
-        public string Name { get => name; set { name = value; UpdateInfoAboutGames(); } }
+        public string Name { get => name; set { name = value; UpdateInfoAboutGames(); MakeNotification(modificatons.others); } }
 
         public void ChangeInfoAboutGame(byte[] image, byte[] icon, decimal price, int age, int power)
         {
+            MakeNotification(modificatons.others);
+
             imageOfGame = image;
             this.icon = icon;
             money = price;
@@ -82,7 +85,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public int PowerOfPc { get => powerOfPc; }
 
         int rate;
-        public int Rate { get => rate; set { rate = value; UpdateInfoAboutGames(); } }
+        public int Rate { get => rate; set { rate = value; UpdateInfoAboutGames(); MakeNotification(modificatons.rate); } }
 
         private int recAge;
         public int RecAge { get => recAge; }
@@ -116,7 +119,7 @@ namespace UltraGamesStoreNoSteamNONONO
             return list;
 
         }
-         public List<Review> GetReviews( )
+        public List<Review> GetReviews()
         {
             string query = "SELECT * FROM Reviews WHERE GamesId = @gameId";
             Tuple<string, object>[] parameters = { new Tuple<string, object>("gameId", GameId) };
@@ -129,11 +132,61 @@ namespace UltraGamesStoreNoSteamNONONO
             }
             return list;
         }
+
+
+
+        public void ChangeRate()
+        {
+            int rate = 0;
+
+            List<Review> Reviews = this.GetReviews();
+            for (int i = 0; i < Reviews.Count; i++)
+            {
+                rate += Reviews[i].grade;
+            }
+            rate /= Reviews.Count;
+
+            this.Rate = rate;
+        }
+
         static public event Action Changed;
 
+        [Flags]
+        private enum modificatons
+        {
+            rate = 1, others = 2
+        }
+        private void MakeNotification(modificatons mod)
+        {
+            StringBuilder notification = new StringBuilder($"игра: {name} содержит следующие изменения:  ");
+            if ((mod & modificatons.rate) == modificatons.rate)
+            {
+                notification.Append($"Поменялся рейтинг. Новое значение{rate}");
+            }
+            if ((mod & modificatons.others) == modificatons.others)
+            {
+                notification.Append($"Поменялась информация об игре, посмотрите изменения в магазине");
+            }
+
+            string query
+                = "SELECT username FROM Users WHERE Users.id in (SELECT UserId FROM UsersListOfWanted WHERE GamesId = @gameid) OR  Users.id in (SELECT UserId FROM UsersListBasket WHERE GamesId =  @gameid )";
+            Tuple<string, object>[] parameters = { new Tuple<string, object>("gameid", GameId) };
+            DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
+            foreach (DataRow row in table.Rows)
+            {
+                query = "INSERT Notifications VALUES (@username, @text)";
+                parameters = new Tuple<string, object>[]
+                  {
+                  new Tuple<string, object>("username", row["username"]),
+                  new Tuple<string, object>("text", notification.ToString())
+                  };
+                sqlBase.NoResultQuery(query, parameters);
+            }
+
+
+        }
         protected virtual void UpdateInfoAboutGames()
         {
-            //  icon = Image.FromFile("C:\\Users\\iliam\\Desktop\\del\\MySteam\\Images\\Новая папка\\Optimus.jpg");
 
             string query = "UPDATE Games SET nameOfGame=@name, price=@price, recAge=@recAge, powerOfPC= @powerOfPc, icon=@newicon, imageOfGame=@newimageOfGame  WHERE id=@id";
             Tuple<string, object>[] parameters = {

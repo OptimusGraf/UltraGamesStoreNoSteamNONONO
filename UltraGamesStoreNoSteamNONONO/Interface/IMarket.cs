@@ -25,7 +25,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public void RemoveFromWantedList(Game game);
 
         public string BuyGames();
-        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase);
+        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase);
         public event Action ChangedUI;
 
         public bool BassketContainGames(Game game);
@@ -39,6 +39,8 @@ namespace UltraGamesStoreNoSteamNONONO
         public List<Review> GetReviews(Game game);
         public void NewReview(Game game, int grade, string text);
         public void AnwserReview(Review review, string text);
+        public List<string> GetNotifications();
+        public void RemoveNotififcations();
      
     }
 }

@@ -26,6 +26,8 @@ namespace UltraGamesStoreNoSteamNONONO
             labelName.Text = game.Name;
             labelAuthor.Text = game.Author;
             pictureBox1.Image = game.Icon.FromByteArrayToImage();
+            labelDate.Text = game.Release.ToString();
+            labelRate.Text = game.Rate.ToString();
             MakeButtons();
         }
         public GameView(Game game, IMarket market)

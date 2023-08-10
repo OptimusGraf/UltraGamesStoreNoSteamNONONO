@@ -15,7 +15,7 @@ namespace UltraGamesStoreNoSteamNONONO
     public class User
     {
         // списки игр можно попробовать сделать через generic 
-        public User(DataRow row, SQLBase sqlBase) : 
+        public User(DataRow row, SQLBase sqlBase) :
             this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], row["image"] as byte[], (decimal)row["moneyOfuser"])
         {
             availableGames = new ListOfGames(sqlBase, id, "UsersListOfGames");
@@ -23,7 +23,7 @@ namespace UltraGamesStoreNoSteamNONONO
             wantedGames = new ListOfGames(sqlBase, id, "UsersListOfWanted");
             createdGames = new List<Game>();
             UpdateInfoAboutGames();
-     
+
             //ДОБАВИТЬ КАРТИНКИ;
         }
 
@@ -141,12 +141,37 @@ namespace UltraGamesStoreNoSteamNONONO
             string query = "UPDATE Users SET image = @newImage,PowerOfPC=@newPower, moneyofuser = @money, age = @age  WHERE id=@id";
             sqlBase.NoResultQuery(query, parameters);
         }
+
+        public List<string> LoadNoatification()
+        {
+            string query = "SELECT * FROM Notifications WHERE username = @name";
+            Tuple<string, object>[] parameters = { new Tuple<string, object>("name", userName) };
+
+            DataTable table = sqlBase.DataQuery(query, parameters).Tables[0];
+
+            List<string> notification= new List<string>();
+            foreach (DataRow row in table.Rows)
+            {
+                notification.Add((string)row["text"] );
+            }
+
+            return notification;
+        }
+
+
         public void UpdateInfoAboutGames()
         {
             basket.LoadData();
             wantedGames.LoadData();
             availableGames.LoadData();
             LoadDataCreatedGames();
+        }
+        public void RemoveNotififcations()
+        {
+            string query = "DELETE Notifications WHERE UserName=@name";
+            Tuple<string, object>[] parameters = { new Tuple<string, object>("name", userName) };
+
+            sqlBase.NoResultQuery(query, parameters);
         }
     }
 }

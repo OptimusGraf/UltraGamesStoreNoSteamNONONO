@@ -24,7 +24,7 @@ namespace UltraGamesStoreNoSteamNONONO.Forms.AuthorForms
             {
                 bool result = Market.CreateGame
                     (textBoxName.Text, numericUpDownPrice.Value, 0, Convert.ToInt32(numericUpDownAge.Value),
-                   DateOnly.FromDateTime(DateTime.Now), Convert.ToInt32(numericUpDownPower.Value),
+                     Convert.ToInt32(numericUpDownPower.Value),
                    Market.GetInfoAboutUser().UserName, myPictureBoxImage.Image, myPictureBoxIcon.Image, Market.SQLBase);
                 if (!result)
                 {

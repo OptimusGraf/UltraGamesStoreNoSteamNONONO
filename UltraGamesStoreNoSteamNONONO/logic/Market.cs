@@ -99,12 +99,13 @@ namespace UltraGamesStoreNoSteamNONONO
             return "Успешно";
         }
 
-        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
+        public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
             //тут надо добавить обработку исключений и так же возврат получилось или нет
             bool result;
             try
             {
+                DateOnly date = DateOnly.FromDateTime(DateTime.Now);
                 Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image, icon, sqlBase);
                 result = true;
                 ChangedUI?.Invoke();
@@ -220,16 +221,25 @@ namespace UltraGamesStoreNoSteamNONONO
             return game.GetReviews();
         }
 
-        public void NewReview(Game game,int grade,string text)
+        public void NewReview(Game game, int grade, string text)
         {
-            Review.NewReview(game, CurrentUser.UserName,grade, text, sqlBase);
+            Review.NewReview(game, CurrentUser.UserName, grade, text, sqlBase);
+            game.ChangeRate();
             ChangedUI?.Invoke();
         }
-        public void AnwserReview(Review review,string text)
+        public void AnwserReview(Review review, string text)
         {
             review.AuthorComment = text;
             ChangedUI?.Invoke();
         }
 
+        public List<string> GetNotifications()
+        {
+          return  CurrentUser.LoadNoatification();
+        }
+        public void RemoveNotififcations()
+        {
+            currentUser.RemoveNotififcations();
+        }
     }
 }
