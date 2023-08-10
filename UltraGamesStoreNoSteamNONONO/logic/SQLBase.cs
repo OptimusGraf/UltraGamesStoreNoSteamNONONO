@@ -10,9 +10,6 @@ namespace UltraGamesStoreNoSteamNONONO
 {
     public class SQLBase
     {
-
-
-
         string ConnectionString;
         SqlConnection connection;
 

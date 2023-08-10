@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -33,7 +25,6 @@ namespace UltraGamesStoreNoSteamNONONO
             labelPower.Text += game.PowerOfPc;
             pictureBoxForMainImage.Image = game.ImageOfGame.FromByteArrayToImage();
             AddReviews();
-
         }
 
         public void AddReviews()
@@ -44,7 +35,6 @@ namespace UltraGamesStoreNoSteamNONONO
             {
                 flowLayoutPanel1.Controls.Add(new ReviewView(Market, review, game.Author));
             }
-
         }
         private void buttonExit_Click(object sender, EventArgs e)
         {

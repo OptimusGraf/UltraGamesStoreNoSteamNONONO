@@ -1,27 +1,18 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using System.Data;
 using System.Text;
-using System.Windows.Forms;
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     public class Game
     {
-        // sqlBase сделать статичным
-        // подумать об инкапсюляции 
 
         public Game(DataRow row, SQLBase sqlBase) :
-            this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], DateOnly.FromDateTime((DateTime)row["release"]), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], (row["icon"] as byte[]), (decimal)row["price"], (row["imageOfGame"] as byte[]), sqlBase)
+            this((string)row["nameOfGame"], (int)row["id"], (string)row["author"], DateOnly.FromDateTime((DateTime)row["release"]), (int)row["powerOfPC"], (int)row["rate"], (int)row["recAge"], (row["icon"] as byte[]), (decimal)row["price"], (row["imageOfGame"] as byte[]))
         {
-            // ДАТЫ И КАРТИНКИ РЕАЛЬЗИВАТЬ
         }
 
-        static public void newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
+        static public void newGame(string nameOfGame, decimal money, int rate, int recAge, DateOnly date, int powerOfPc, string author, byte[] image, byte[] icon)
         {
-            //картинки потом
-            //сюда тоже исключения
-            //дата
-            // а если есть игра с таким названием
             Tuple<string, object>[] parametrs = {
                 new Tuple<string, object> ("name",nameOfGame),
                 new Tuple<string, object>("price", money),
@@ -35,14 +26,8 @@ namespace UltraGamesStoreNoSteamNONONO
 
             string query = "INSERT Games VALUES(@name, @price,@rate,@recAge, @date,@author,@powerOfPC, @icon,@image)";
             sqlBase.NoResultQuery(query, parametrs);
-
-            //query = "SELECT id FROM Games WHERE nameOfGame = @name";
-            //int id = (int)(sqlBase.DataQuery(query, parametrs).Tables[0].Rows[0]["id"]);
-
-            //Game game = new Game(nameOfGame, id, author, date, powerOfPc, rate, recAge, icon, money, image, sqlBase);
-            //return game;
         }
-        protected Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge, byte[] icon, decimal money, byte[] imageOfGame, SQLBase sqlBase)
+        protected Game(string name, int id, string author, DateOnly date, int powerOfPc, int rate, int recAge, byte[] icon, decimal money, byte[] imageOfGame)
         {
             this.name = name;
             this.gameId = id;
@@ -54,7 +39,6 @@ namespace UltraGamesStoreNoSteamNONONO
             this.icon = icon;
             this.money = money;
             this.imageOfGame = imageOfGame;
-            this.sqlBase = sqlBase;
         }
 
         readonly int gameId;
@@ -99,8 +83,8 @@ namespace UltraGamesStoreNoSteamNONONO
         byte[] imageOfGame;
         public byte[] ImageOfGame { get => imageOfGame; }
 
-        SQLBase sqlBase;
-        public SQLBase SQLBase { get => SQLBase; set => SQLBase = value; }
+        protected static SQLBase sqlBase;
+        public static SQLBase SQLBase { get => sqlBase; set => sqlBase = value; }
 
         public override bool Equals(object? obj) => ((obj is Game) && ((Game)obj).gameId == this.gameId);
         public override int GetHashCode() => this.gameId.GetHashCode();

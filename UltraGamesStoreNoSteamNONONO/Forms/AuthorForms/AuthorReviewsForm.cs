@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace UltraGamesStoreNoSteamNONONO
 {
     public partial class AuthorReviewsForm : Form, IView
@@ -21,9 +12,6 @@ namespace UltraGamesStoreNoSteamNONONO
             this.game = game;
             UpdateView();
         }
-
-
-
         public void UpdateView()
         {
             if (this.game != null)

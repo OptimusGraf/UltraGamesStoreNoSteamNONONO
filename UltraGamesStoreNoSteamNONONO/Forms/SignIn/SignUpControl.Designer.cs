@@ -46,7 +46,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Yu Gothic UI", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(110, 11);
+            label1.Location = new Point(91, 17);
             label1.Name = "label1";
             label1.Size = new Size(198, 28);
             label1.TabIndex = 0;
@@ -56,7 +56,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.Location = new Point(56, 58);
+            label2.Location = new Point(50, 63);
             label2.Name = "label2";
             label2.Size = new Size(57, 21);
             label2.TabIndex = 1;
@@ -66,7 +66,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(44, 111);
+            label3.Location = new Point(50, 112);
             label3.Name = "label3";
             label3.Size = new Size(66, 21);
             label3.TabIndex = 2;
@@ -76,7 +76,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(44, 161);
+            label4.Location = new Point(47, 162);
             label4.Name = "label4";
             label4.Size = new Size(69, 21);
             label4.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(24, 212);
+            label5.Location = new Point(47, 208);
             label5.Name = "label5";
             label5.Size = new Size(113, 21);
             label5.TabIndex = 4;
@@ -94,14 +94,14 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(130, 60);
+            textBox1.Location = new Point(169, 65);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(178, 23);
             textBox1.TabIndex = 5;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(130, 113);
+            textBox2.Location = new Point(169, 114);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
             textBox2.Size = new Size(178, 23);
@@ -109,7 +109,7 @@
             // 
             // numericUpDown1
             // 
-            numericUpDown1.Location = new Point(130, 164);
+            numericUpDown1.Location = new Point(169, 165);
             numericUpDown1.Maximum = new decimal(new int[] { 150, 0, 0, 0 });
             numericUpDown1.Name = "numericUpDown1";
             numericUpDown1.Size = new Size(178, 23);
@@ -118,7 +118,7 @@
             // button1
             // 
             button1.Font = new Font("Yu Gothic UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(119, 276);
+            button1.Location = new Point(81, 267);
             button1.Name = "button1";
             button1.Size = new Size(178, 40);
             button1.TabIndex = 9;
@@ -128,13 +128,13 @@
             // 
             // numericUpDown2
             // 
-            numericUpDown2.Location = new Point(143, 210);
+            numericUpDown2.Location = new Point(169, 211);
             numericUpDown2.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(165, 23);
+            numericUpDown2.Size = new Size(178, 23);
             numericUpDown2.TabIndex = 10;
             // 
-            // SingUpControl
+            // SignUpControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -148,7 +148,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Name = "SingUpControl";
+            Name = "SignUpControl";
             Size = new Size(390, 345);
             ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();

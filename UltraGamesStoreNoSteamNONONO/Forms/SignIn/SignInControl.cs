@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace UltraGamesStoreNoSteamNONONO
 {
-    // Тут разобраться с искл
     internal partial class SignInControl : UserControl
     {
         IMarket market;
@@ -22,13 +12,12 @@ namespace UltraGamesStoreNoSteamNONONO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
+            if (market.SignIn(textBox1.Text, textBox2.Text))
             {
-                market.SignIn(textBox1.Text, textBox2.Text);
                 ParentForm.DialogResult = DialogResult.OK;
                 ParentForm.Close();
             }
-            catch (Exception ex)
+            else
             {
                 MessageBox.Show("Неверный логин или пароль");
             }
@@ -37,7 +26,6 @@ namespace UltraGamesStoreNoSteamNONONO
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("В целях безопасноти,мы не восстанавливаем пароль. ВСПОМИНАЙТЕ");
-
         }
     }
 }

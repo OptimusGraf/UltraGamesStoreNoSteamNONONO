@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿
 
 namespace UltraGamesStoreNoSteamNONONO
-{// асинки добавить, изменение инфомрации об  играх, передлать в бул
+{ 
     public class Market : IMarket
     {
         SQLBase sqlBase;
@@ -25,6 +15,7 @@ namespace UltraGamesStoreNoSteamNONONO
         public Market(string connection)
         {
             this.sqlBase = new SQLBase(connection);
+            Game.SQLBase = this.sqlBase;
         }
 
         public decimal UsersMoney { get => currentUser.Money; set { currentUser.Money = value; ChangedUI?.Invoke(); } }
@@ -101,12 +92,11 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public bool CreateGame(string nameOfGame, decimal money, int rate, int recAge, int powerOfPc, string author, byte[] image, byte[] icon, SQLBase sqlBase)
         {
-            //тут надо добавить обработку исключений и так же возврат получилось или нет
             bool result;
             try
             {
                 DateOnly date = DateOnly.FromDateTime(DateTime.Now);
-                Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image, icon, sqlBase);
+                Game.newGame(nameOfGame, money, rate, recAge, date, powerOfPc, author, image, icon);
                 result = true;
                 ChangedUI?.Invoke();
             }
@@ -153,10 +143,18 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        public void SignIn(string name, string pasword)
+        public bool SignIn(string name, string pasword)
         {
-            currentUser = User.SingIn(name, pasword, sqlBase);
-            ChangedUI?.Invoke();
+            try
+            {
+                currentUser = User.SingIn(name, pasword, sqlBase);
+                ChangedUI?.Invoke();
+                return true;
+            }
+            catch (Exception)
+            {  
+                return false;
+            }
         }
 
         public void SignOut()
@@ -165,10 +163,18 @@ namespace UltraGamesStoreNoSteamNONONO
             ChangedUI?.Invoke();
         }
 
-        public void SignUp(string username, int age, string password, int powerOfPc)
+        public bool SignUp(string username, int age, string password, int powerOfPc)
         {
-            //ИСКЛЮЧЕНИЯ
-            currentUser = User.NewUser(username, age, password, powerOfPc, sqlBase);
+            try
+            {
+            
+                currentUser = User.NewUser(username, age, password, powerOfPc, sqlBase);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public bool BassketContainGames(Game game)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace UltraGamesStoreNoSteamNONONO.Forms.AuthorForms
 {
@@ -10,7 +6,6 @@ namespace UltraGamesStoreNoSteamNONONO.Forms.AuthorForms
     {
         public CreateGameForm(IMarket market) : base(market)
         {
-
         }
 
         public override void UpdateView()

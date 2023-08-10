@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace UltraGamesStoreNoSteamNONONO
 {
     internal class AuthorReviewView : ReviewView
@@ -16,10 +11,6 @@ namespace UltraGamesStoreNoSteamNONONO
             button.Font = new Font("Yu Gothic UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             button.Click += Button_Click;
             panel1.Controls.Add(button);
-
-        
-
-
         }
         protected override void ReviewView_Load(object sender, EventArgs e)
         {

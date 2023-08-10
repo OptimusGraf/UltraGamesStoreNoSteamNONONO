@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 
 namespace UltraGamesStoreNoSteamNONONO
 {
-    // с инкапсюляции что то сделать
     public class Review
     {
         SQLBase sqlBase;

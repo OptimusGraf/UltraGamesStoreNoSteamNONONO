@@ -1,20 +1,11 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
+﻿
 using System.Data;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
-using System.Xml;
-using System.Xml.Linq;
+
 
 namespace UltraGamesStoreNoSteamNONONO
 {
     public class User
     {
-        // списки игр можно попробовать сделать через generic 
         public User(DataRow row, SQLBase sqlBase) :
             this(sqlBase, (int)row["id"], (string)row["username"], (int)row["age"], (int)row["PowerOfPC"], row["image"] as byte[], (decimal)row["moneyOfuser"])
         {
@@ -23,8 +14,6 @@ namespace UltraGamesStoreNoSteamNONONO
             wantedGames = new ListOfGames(sqlBase, id, "UsersListOfWanted");
             createdGames = new List<Game>();
             UpdateInfoAboutGames();
-
-            //ДОБАВИТЬ КАРТИНКИ;
         }
 
         private User(SQLBase sqlBase, int id, string userName, int age, int powerOfPc, byte[] image, decimal money)
@@ -61,7 +50,6 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         static public User SingIn(string name, string pasword, SQLBase sqlBase)
         {
-            // исключения, момент когда нет такого логина и пароля
             string query = "SELECT * FROM Users WHERE username=@name and pasword= @pasword";
 
             Tuple<string, object>[] parametres = { new Tuple<string, object>("name", name), new Tuple<string, object>("pasword", pasword) };
@@ -76,8 +64,7 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         static public User NewUser(string username, int age, string password, int powerOfPc, SQLBase sqlBase)
         {
-            //картинку потом
-            //сюда тоже исключения
+         
             Tuple<string, object>[] parametrs = { new Tuple<string, object> ("name",username),
                 new Tuple<string, object>("password", password),
                 new Tuple<string, object>("age",age),

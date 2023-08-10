@@ -1,18 +1,12 @@
-﻿ using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace UltraGamesStoreNoSteamNONONO
 {
     public interface IMarket
     {
         public SQLBase SQLBase { get; set; }
-        public void SignIn(string name, string pasword);
+        public bool SignIn(string name, string pasword);
         public void SignOut();
-        public void SignUp(string username, int age, string password, int powerOfPc);
+        public bool SignUp(string username, int age, string password, int powerOfPc);
 
         public List<Game> TopTenGamesFrom (int cursor);
         public HashSet<Game> GetBasketList();

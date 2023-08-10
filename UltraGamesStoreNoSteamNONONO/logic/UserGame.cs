@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.Xml;
+
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -15,8 +11,6 @@ namespace UltraGamesStoreNoSteamNONONO
 
         public UserGame(int userId, DataRow gameRow, SQLBase sqlBase) : base(gameRow, sqlBase)
         {
-
-            // тут проблема а если нет???7
             id=userId;
             Tuple<string, object>[] parametrs = { new Tuple<string, object>("userId", userId), new Tuple<string, object>("gameId", GameId) };
             DataSet userGameData = sqlBase.DataQuery
@@ -89,7 +83,7 @@ namespace UltraGamesStoreNoSteamNONONO
                 new Tuple<string, object>("progress", progress),
                 new Tuple<string, object>("isLoaded", isLoaded),
                 new Tuple<string, object>("id", id) };
-            SQLBase.NoResultQuery(query, parametrs);
+            sqlBase.NoResultQuery(query, parametrs);
             ChangedMaster();
 
         }

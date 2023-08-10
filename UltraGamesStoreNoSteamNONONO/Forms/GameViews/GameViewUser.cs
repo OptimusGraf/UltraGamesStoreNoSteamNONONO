@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace UltraGamesStoreNoSteamNONONO
 {
     public class GameViewUser : GameView
     {
         public GameViewUser(UserGame game, IMarket market) : base(game, market)
         {
-           
         }
         protected override void MakeButtons()
         {

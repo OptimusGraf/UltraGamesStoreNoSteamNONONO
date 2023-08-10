@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
+﻿
 using System.Data;
-
 
 namespace UltraGamesStoreNoSteamNONONO
 {
@@ -47,7 +44,6 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             if (!games.Contains(game))
             {
-                // ТУТ НАДО ОБРАБОТКУ ИСКЛЮЧЕНИЙ 
                 games.Add(game);
             }
         }
@@ -55,7 +51,6 @@ namespace UltraGamesStoreNoSteamNONONO
         {
             if (!games.Contains(game))
             {
-                // ТУТ НАДО ОБРАБОТКУ ИСКЛЮЧЕНИЙ 
                 games.Add(game);
                 Tuple<string, object>[] parametrs = { new Tuple<string, object>("userid", userId), new Tuple<string, object>("gameid", game.GameId) };
                 string query = $"INSERT {nameOfTable} (UserId,GamesId) VALUES (@userid, @gameid)";
@@ -65,7 +60,6 @@ namespace UltraGamesStoreNoSteamNONONO
         }
         public void DeleteGame(Game game)
         {
-            // А ЕСЛИ НЕ СОДЕРЖИТ
             if (games.Contains(game))
             {
                 games.Remove(game);
